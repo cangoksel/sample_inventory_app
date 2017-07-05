@@ -1,0 +1,91 @@
+
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'com.bmuschko.docker-remote-api'
+sourceCompatibility = 1.8
+
+bootRepackage {
+    mainClass = 'tr.com.innova.sample.Application'
+}
+
+jar {
+    baseName = 'inventory-rest'
+
+    /*  from 'dist/dev'
+      eachFile { details ->
+
+          details.path = details.path.startsWith('META-INF') ?: 'static/' + details.path
+      }
+      // Jar has duplicate empty folders (see http://issues.gradle.org/browse/GRADLE-1830)
+      // So we need to set includeEmptyDirs to false
+      includeEmptyDirs = false*/
+}
+compileJava.dependsOn(processResources)
+
+
+dependencies {
+    compile project(":database")
+    compile project(':domain')
+    compile project(':service')
+    compile project(':web')
+    compile('org.springframework.security:spring-security-taglibs')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-autoconfigure')
+    compile('org.springframework.boot:spring-boot-starter-hateoas')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    /*compile('org.springframework.boot:spring-boot-starter-undertow')*/
+    compile('org.springframework.boot:spring-boot-starter-web')/* {
+        exclude module: 'spring-boot-starter-tomcat'
+        exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-core'
+        exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-el'
+        exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-websocket'
+    }*/
+    /*compile('io.undertow.jastow:jastow:2.0.1.Final')*/
+    compile("org.hibernate:hibernate-validator")
+    runtime('org.hibernate:hibernate-ehcache')
+    compile('com.fasterxml.jackson.core:jackson-core')
+    compile('com.fasterxml.jackson.core:jackson-databind')
+    compile("org.apache.camel:camel-spring-boot-starter:$camelVersion")
+    compile("org.apache.cxf:cxf-rt-transports-http-jetty:3.1.5")
+    compile("org.apache.camel:camel-spring-boot-starter:${camelVersion}")
+    compile("org.apache.camel:camel-cxf:${camelVersion}") {
+        exclude(group: 'org.apache.cxf', module: 'cxf-rt-rs-security-oauth')
+    }
+    compile("org.apache.cxf:cxf-rt-rs-client:${cxfVersion}")
+    runtime("org.apache.camel:camel-jaxb:${camelVersion}")
+    runtime("org.apache.camel:camel-http4:${camelVersion}")
+    runtime("org.apache.camel:camel-quartz2:${camelVersion}")
+    runtime("org.apache.camel:camel-jpa:${camelVersion}")
+    runtime("org.apache.camel:camel-mail:${camelVersion}") {
+        exclude(group: "javax.mail", module: "mail")
+    }
+    testCompile("org.apache.camel:camel-test:${camelVersion}")
+    compile("ch.qos.logback.contrib:logback-mongodb-classic:0.1.2")
+    compile group: 'org.postgresql', name: 'postgresql'
+    runtime('org.postgresql:postgresql:42.0.0')
+    runtime('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+    runtime('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
+
+    compile("org.docx4j:docx4j:${docx4jVersion}") {
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        exclude module: 'log4j'
+    }
+
+    compile("org.docx4j:docx4j-ImportXHTML:${docx4jVersion}") {
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        exclude module: 'log4j'
+    }
+
+    compile("com.lowagie:itext:${itextVersion}")
+    compile("org.xhtmlrenderer:flying-saucer-pdf:${flyingSaucerVersion}")
+    compile("org.jsoup:jsoup:${jsoupVersion}")
+    compile("net.sf.jtidy:jtidy:r938")
+    compile("net.sf.barcode4j:barcode4j:2.1")
+    compile("com.google.zxing:javase:3.2.1")
+    compile("org.apache.poi:poi-ooxml:3.14")
+}
+

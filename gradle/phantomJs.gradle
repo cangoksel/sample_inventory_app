@@ -1,0 +1,22 @@
+import static org.apache.tools.ant.taskdefs.condition.Os.*
+
+task unzipPhantomJs(type: Copy) {
+    def osFilenamePart
+    if (isFamily(FAMILY_WINDOWS)) {
+        osFilenamePart = "windows.zip"
+    } else if (isFamily(FAMILY_MAC)) {
+        osFilenamePart = "macosx.zip"
+    } else if (isFamily(FAMILY_UNIX)) {
+        osFilenamePart = isArch("amd64") ? "linux-x86_64.tar.bz2" : "linux-i686.tar.bz2"
+    }
+    def filename = "phantomjs-$phantomJsVersion-$osFilenamePart"
+    def outputDir = file("$buildDir/webdriver/phantomjs")
+    def archive = file("$projectDir/webdriver/$filename")
+
+    outputs.dir(outputDir)
+    from(isFamily(FAMILY_MAC) || isFamily(FAMILY_WINDOWS) ? zipTree(archive) : tarTree(archive))
+    into(outputDir)
+    eachFile { FileCopyDetails fcp ->
+        fcp.relativePath = new RelativePath(!fcp.directory, *fcp.relativePath.segments[1..-1])
+    }
+}

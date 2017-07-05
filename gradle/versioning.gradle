@@ -1,0 +1,38 @@
+ext.buildTimestamp = new Date().format("yyyy-MM-dd HH:mm:ss")
+
+version = generateVersion(1, 0)
+
+def generateVersion(Integer major, Integer minor) {
+    new ProjectVersion(project, major, minor)
+}
+
+class ProjectVersion {
+    Project project
+    Integer major
+    Integer minor
+
+    ProjectVersion(Project project, Integer major, Integer minor) {
+        this.major = major
+        this.minor = minor
+        this.project = project
+    }
+
+
+    @Override
+    public String toString() {
+        String fullVersion = "$major.$minor"
+
+        def build = revisionNumber
+        if (project.properties['target.platform'] != "dev" && build) {
+            fullVersion += ".${build}"
+        } else {
+            fullVersion += "-SNAPSHOT"
+        }
+
+        fullVersion
+    }
+
+    private String getRevisionNumber() {
+        return System.getenv("SVN_REVISION")
+    }
+}

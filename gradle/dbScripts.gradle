@@ -1,0 +1,66 @@
+import groovy.sql.Sql
+
+import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS
+import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    driver
+}
+
+dependencies {
+    driver group: 'org.postgresql', name: 'postgresql', version: postgresqlVersion
+}
+
+URLClassLoader loader = GroovyObject.class.classLoader as URLClassLoader
+configurations.driver.each {File file ->
+    loader.addURL(file.toURL())
+}
+
+task setupPostgreDB << {
+    def locale
+    if (isFamily(FAMILY_WINDOWS)) {
+        locale = 'Turkish_Turkey.1254'
+    } else {
+        locale = 'tr_TR.UTF-8'
+    }
+
+    def driverName = 'org.postgresql.Driver'
+    Sql sql = Sql.newInstance(
+            'jdbc:postgresql://localhost:5432/postgres',
+            'postgres',
+            'postgres',
+            driverName
+    )
+    // Create User with username: sample and password: sample1
+    sql.execute """
+            CREATE ROLE inventoryuser LOGIN  PASSWORD 'inventoryuser1' VALID UNTIL 'infinity';
+                """.stripIndent()
+
+    // Create DB with name: legalite
+    sql.execute """
+              CREATE DATABASE inventory
+              WITH ENCODING='UTF8'
+                   OWNER=sample
+                   LC_COLLATE='${locale}'
+                   LC_CTYPE='${locale}'
+                   CONNECTION LIMIT=-1;
+                """.stripIndent()
+}
+
+task recreateDBSchema << {
+    def driverName = 'org.postgresql.Driver'
+    Sql sql = Sql.newInstance(
+            'jdbc:postgresql://10.10.10.120:15432/inventory',
+            'inventoryuser',
+            'inventoryuser1',
+            driverName
+    )
+    sql.execute """
+                drop schema public cascade;
+                create schema public;
+                """.stripIndent()
+}

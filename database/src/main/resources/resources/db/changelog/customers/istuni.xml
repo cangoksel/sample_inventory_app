@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="201606011631-00" author="mersoy" context="istuni">
+        <!--<insert tableName="hizmet">-->
+            <!--<column name="id" value="773f8c82-2038-45c5-86b1-be70277ddbd1" />-->
+            <!--<column name="deleted" valueBoolean="false" />-->
+            <!--<column name="version" valueNumeric="0" />-->
+            <!--<column name="ad" value="İstanbul Üniversitesi Rektörlüğü" />-->
+            <!--<column name="adres" value="İstanbul Üniversitesi, Beyazıt Yerleşkesi 34452 Beyazıt, İstanbul – Türkiye" />-->
+            <!--<column name="disk_alan_buyuklugu_gb" value="100" />-->
+            <!--<column name="eposta" value="iubilgi1@istanbul.edu.tr" />-->
+            <!--<column name="hizmet_numarasi" value="8da0a80a-e13c-4a41-b332-dc52e4f7f5bd" />-->
+            <!--<column name="hizmet_tipi" value="MUVEKKIL" />-->
+            <!--<column name="kayit_yapildi" value="true" />-->
+            <!--<column name="kullanici_sayisi" value="100" />-->
+            <!--<column name="lisans_adi" value="Paket1" />-->
+            <!--<column name="muvekkil_girisi_yapilabilir" value="true" />-->
+            <!--<column name="sure_ay" value="12" />-->
+            <!--<column name="telefon" value="0 (212) 440 00 00" />-->
+        <!--</insert>-->
+
+    </changeSet>
+</databaseChangeLog>

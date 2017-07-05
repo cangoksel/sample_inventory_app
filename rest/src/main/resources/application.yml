@@ -1,0 +1,93 @@
+security:
+  user:
+    name: admin
+    password: admin
+spring:
+  profiles: default
+  jpa:
+    properties: {
+      generate-ddl:  true,
+      hibernate.ddl-auto: create-drop,
+      #'hibernate.transaction.jta.platform': 'org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform',
+      'hibernate.create_empty_composites.enabled': 'true',
+      'hibernate.cache.use_query_cache': 'true',
+      'hibernate.cache.use_second_level_cache': 'true',
+      'hibernate.cache.region.factory_class': 'org.hibernate.cache.ehcache.EhCacheRegionFactory',
+
+      'javax.persistence.sharedCache.mode': 'ENABLE_SELECTIVE',
+      'hibernate.dialect': 'org.hibernate.dialect.PostgreSQL94Dialect',
+      'org.hibernate.envers.audit_table_suffix': '_L',
+      'hibernate.search.default.directory_provider': 'ram',
+      #'hibernate.search.default.indexBase': '/var/lucene/indexes'
+      'hibernate.search.Merci.directory_provider': 'ram',
+      #'hibernate.search.Merci.indexBase': 'C:\Temp\Lucene'
+    }
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: sample
+    password: sample1
+    url: 'jdbc:postgresql://${DOCKER_HOST_IP:localhost}:5432/sample'
+  data:
+    mongodb:
+      uri: 'mongodb://${DOCKER_HOST_IP:localhost}/sample'
+  jackson:
+    serialization: {
+      'write_dates_as_timestamps': 'false'
+    }
+  resources:
+     static-locations: ['classpath:/BOOT-INF/classes/static/','classpath:/classes/static/','classpath:/static/','classpath:/public/','classpath:/resources/','classpath:/META-INF/resources/', 'file:../web/dist/dev/','file:../../../../../web/dist/dev/','file:../../../../web/dist/dev/', 'file:../../../web/dist/dev/','file:../../web/dist/dev/']
+server:
+  servlet-path: '/api'
+logging:
+  level: {
+    'root': 'info',
+    'org.quartz.core.JobRunShell': 'info',
+    'org.hibernate.SQL': 'debug',
+    #'org.hibernate.type': 'trace',
+    'org.apache.camel': 'off',
+    'tr.com.innova': 'debug'
+  }
+management:
+  context-path: '/management'
+
+ptt:
+  kullaniciadi: 'public_user'
+  sifre: 'ykr-1975*219355!-tc'
+  musteriid: '1975380401'
+
+uyap:
+  dosyaBilgileriAlindiYap: false
+
+smtp:
+  host: 'localhost'
+  username: ''
+  password: ''
+  from: 'legalite@innova.com.tr'
+liquibase:
+  change-log: 'classpath:/db/changelog/db.changelog-master.xml'
+  contexts: 'legalite,test'
+multipart:
+  max-request-size: '75Mb'
+
+---
+
+spring:
+  profiles: production
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: sample
+    password: sample1
+    url: 'jdbc:postgresql://legalitedb:5432/sample'
+  data:
+    mongodb:
+      uri: mongodb://legalitemongodb/sample
+liquibase:
+  change-log: 'classpath:/db/changelog/db.changelog-master.xml'
+  contexts: 'legalite'
+logging:
+  level: {
+    'root': 'error',
+    'org.hibernate.SQL': 'off',
+    #'org.hibernate.type': 'trace',
+    'tr.com.innova': 'warn'
+  }

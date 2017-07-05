@@ -1,0 +1,43 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="cangoksel"
+               id="201605091602-00"
+               objectQuotingStrategy="QUOTE_ALL_OBJECTS"
+               context="inventory">
+
+        <insert tableName="kullanici">
+            <column name="id" value="00000000-0000-0000-0000-000000000000"/>
+            <column name="deleted" valueBoolean="false"/>
+            <column name="version" valueNumeric="0"/>
+            <column name="ad" value="Admin"/>
+            <column name="eposta" value="admin@legalite.com"/>
+            <column name="hesap_etkin" valueBoolean="true"/>
+            <column name="hesap_kilitli" valueBoolean="false"/>
+            <column name="ilk_kayit_tarihi"/>
+            <column name="last_login" valueDate="2015-11-20 09:57:25.49"/>
+            <column name="ldap_eposta"/>
+            <column name="sifre" value="$2a$10$RtuI9EKmXIBBHnyqhhFoouWArYu6Smc1YYsf9z6.VUPMsANBpxA12"/>
+            <column name="soyad" value="Kullanıcısı"/>
+            <column name="user_name"/>
+        </insert>
+                <insert tableName="rol">
+            <column name="id" value="e6ae9bdc-4b21-411b-8fc7-0b686547cdb3"/>
+            <column name="deleted" valueBoolean="false"/>
+            <column name="version" valueNumeric="0"/>
+            <column name="aciklama" value="Destek Kullanıcısı"/>
+            <column name="is_sistem_rolu" valueBoolean="true"/>
+            <column name="kod" value="ROLE_DESTEK_USER"/>
+            <column name="rol_tipi" value="SISTEM_ADMIN"/>
+        </insert>
+
+        <insert tableName="kullanici_rol">
+            <column name="kullanici_id" value="00000000-0000-0000-0000-000000000000"/>
+            <column name="rol_id" value="e6ae9bdc-4b21-411b-8fc7-0b686547cdb3"/>
+        </insert>
+
+     </changeSet>
+</databaseChangeLog>

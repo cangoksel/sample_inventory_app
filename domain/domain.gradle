@@ -1,0 +1,32 @@
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/generated'
+        }
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file("${buildDir}/classes/main/generated")
+    }
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    compile('org.springframework.security:spring-security-core')
+    compile('com.fasterxml.jackson.core:jackson-databind')
+    compile('org.hibernate:hibernate-validator')
+    compile("org.hibernate:hibernate-core:${hibernateVersion}")
+    compile("org.hibernate:hibernate-envers:${hibernateVersion}")
+    compile("org.hibernate:hibernate-java8:${hibernateVersion}")
+    compile("org.hibernate:hibernate-search-orm:${hibernateSearchVersion}")
+    compile("commons-beanutils:commons-beanutils:${beanUtilsVersion}")
+    compile("org.apache.commons:commons-compress:${compressVersion}")
+
+    compile("com.querydsl:querydsl-jpa:${queryDslVersion}")
+    provided "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
+    testCompile("javax.el:javax.el-api:3.0.0")
+    testCompile("org.glassfish:javax.el:3.0.0")
+}

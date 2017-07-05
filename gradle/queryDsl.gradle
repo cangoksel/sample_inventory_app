@@ -1,0 +1,44 @@
+sourceSets {
+    generatedauto {
+        java {
+            srcDirs = ['src/main/generated-auto']
+        }
+    }
+    generated {
+        java {
+            srcDirs = ['src/main/generated']
+        }
+    }
+}
+
+configurations {
+    querydlsAPT
+}
+
+dependencies {
+    querydlsAPT group: "com.querydsl", name: "querydsl-apt", version: "${queryDslVersion}"
+}
+
+task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates the QueryDSL query types') {
+    source sourceSets.main.java, sourceSets.generated.java
+    options.encoding = 'UTF-8'
+    classpath = configurations.compile + configurations.provided + configurations.querydlsAPT
+    options.compilerArgs = [
+            "-proc:only",
+            "-processor", "com.mysema.query.apt.jpa.JPAAnnotationProcessor"
+    ]
+    destinationDir = sourceSets.generatedauto.java.srcDirs.iterator().next()
+}
+
+compileJava {
+    dependsOn generateQueryDSL
+    source generateQueryDSL.destinationDir, sourceSets.generated.java
+}
+compileGeneratedJava {
+    dependsOn generateQueryDSL
+    options.warnings = false
+    classpath += sourceSets.main.runtimeClasspath
+}
+clean {
+    delete sourceSets.generatedauto.java.srcDirs
+}
