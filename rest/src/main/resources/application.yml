@@ -1,5 +1,5 @@
 security:
-  user:
+  com.github.cangoksel.user:
     name: admin
     password: admin
 spring:
@@ -24,12 +24,12 @@ spring:
     }
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: sample
-    password: sample1
-    url: 'jdbc:postgresql://${DOCKER_HOST_IP:localhost}:5432/sample'
+    username: inventoryuser
+    password: inventoryuser1
+    url: 'jdbc:postgresql://${DOCKER_HOST_IP:localhost}:5432/inventory'
   data:
     mongodb:
-      uri: 'mongodb://${DOCKER_HOST_IP:localhost}/sample'
+      uri: 'mongodb://${DOCKER_HOST_IP:localhost}/inventory'
   jackson:
     serialization: {
       'write_dates_as_timestamps': 'false'
@@ -65,7 +65,7 @@ smtp:
   from: 'legalite@innova.com.tr'
 liquibase:
   change-log: 'classpath:/db/changelog/db.changelog-master.xml'
-  contexts: 'legalite,test'
+  contexts: 'inventory,test'
 multipart:
   max-request-size: '75Mb'
 
@@ -75,15 +75,15 @@ spring:
   profiles: production
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: sample
-    password: sample1
-    url: 'jdbc:postgresql://legalitedb:5432/sample'
+    username: inventoryuser
+    password: inventoryuser1
+    url: 'jdbc:postgresql://legalitedb:5432/inventory'
   data:
     mongodb:
-      uri: mongodb://legalitemongodb/sample
+      uri: mongodb://legalitemongodb/inventory
 liquibase:
   change-log: 'classpath:/db/changelog/db.changelog-master.xml'
-  contexts: 'legalite'
+  contexts: 'inventory'
 logging:
   level: {
     'root': 'error',

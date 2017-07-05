@@ -44,7 +44,7 @@ task setupPostgreDB << {
     sql.execute """
               CREATE DATABASE inventory
               WITH ENCODING='UTF8'
-                   OWNER=sample
+                   OWNER=inventoryuser
                    LC_COLLATE='${locale}'
                    LC_CTYPE='${locale}'
                    CONNECTION LIMIT=-1;
@@ -54,7 +54,7 @@ task setupPostgreDB << {
 task recreateDBSchema << {
     def driverName = 'org.postgresql.Driver'
     Sql sql = Sql.newInstance(
-            'jdbc:postgresql://10.10.10.120:15432/inventory',
+            'jdbc:postgresql://localhost:5432/inventory',
             'inventoryuser',
             'inventoryuser1',
             driverName

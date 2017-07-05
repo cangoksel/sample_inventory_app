@@ -6,7 +6,7 @@ apply plugin: 'com.bmuschko.docker-remote-api'
 sourceCompatibility = 1.8
 
 bootRepackage {
-    mainClass = 'tr.com.innova.sample.Application'
+    mainClass = 'com.github.cangoksel.sample.Application'
 }
 
 jar {
@@ -59,10 +59,10 @@ dependencies {
     runtime("org.apache.camel:camel-quartz2:${camelVersion}")
     runtime("org.apache.camel:camel-jpa:${camelVersion}")
     runtime("org.apache.camel:camel-mail:${camelVersion}") {
-        exclude(group: "javax.mail", module: "mail")
+        exclude(group: "javax.com.github.cangoksel.mail", module: "mail")
     }
     testCompile("org.apache.camel:camel-test:${camelVersion}")
-    compile("ch.qos.logback.contrib:logback-mongodb-classic:0.1.2")
+    //compile("ch.qos.logback.contrib:logback-mongodb-classic:0.1.2")
     compile group: 'org.postgresql', name: 'postgresql'
     runtime('org.postgresql:postgresql:42.0.0')
     runtime('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')

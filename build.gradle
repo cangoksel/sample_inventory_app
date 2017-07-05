@@ -83,7 +83,7 @@ buildscript {
 }
 
 configure(allprojects) {
-    group = "legalite"
+    group = "com.github.cangoksel"
     apply from: "$rootDir/gradle/versioning.gradle"
 
     sonarqube {
@@ -148,13 +148,13 @@ configure(subprojects - project(':database')) {
 
     repositories {
         jcenter()
-        mavenCentral()
+
     }
 
     dependencies {
         // Logging Dependencies
-        compile('org.springframework.boot:spring-boot-starter-log4j2')
-
+        //compile('org.springframework.boot:spring-boot-starter-log4j2')
+        compile("ch.qos.logback.contrib:logback-mongodb-classic:0.1.2")
         compile("com.google.guava:guava:${guavaVersion}")
 
         compile("javax.money:money-api:${javaMoneyVersion}")

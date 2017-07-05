@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="201605091557-00" author="cangoksel" context="inventory" dbms="postgresql">
+
+        <createSequence sequenceName="aa" />
+
+    </changeSet>
+
+    <changeSet author="cangoksel" id="201605091558-00" context="inventory">
+        <createTable tableName="kullanici">
+            <column name="id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
+            <column name="version" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="ad" type="VARCHAR(255)" />
+            <column name="eposta" type="VARCHAR(255)" />
+            <column name="hesap_etkin" type="BOOL" />
+            <column name="hesap_kilitli" type="BOOL" />
+            <column name="ilk_kayit_tarihi" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="last_login" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="ldap_eposta" type="VARCHAR(255)" />
+            <column name="sifre" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="soyad" type="VARCHAR(255)" />
+            <column name="user_name" type="VARCHAR(255)" />
+        </createTable>
+        <createTable tableName="rol">
+            <column name="id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
+            <column name="version" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="aciklama" type="VARCHAR(255)" />
+            <column name="is_sistem_rolu" type="BOOL" />
+            <column name="kod" type="VARCHAR(255)" />
+            <column name="rol_tipi" type="VARCHAR(255)" />
+            <column name="musteri_id" type="UUID" />
+        </createTable>
+        <createTable tableName="kullanici_rol">
+            <column name="kullanici_id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+            <column name="rol_id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="yetki">
+            <column name="id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
+            <column name="version" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="aciklama" type="VARCHAR(255)" />
+            <column name="kod" type="VARCHAR(255)" />
+        </createTable>
+        <createTable tableName="rol_yetki">
+            <column name="rol_id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+            <column name="yetki_id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="belge">
+            <column name="id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
+            <column name="belge_adi" type="VARCHAR(255)" />
+            <column name="belge_boyutu" type="BIGINT" />
+            <column name="belge_tarihi" type="date" />
+            <column name="belge_tipi" type="VARCHAR(255)" />
+        </createTable>
+</changeSet>
+</databaseChangeLog>

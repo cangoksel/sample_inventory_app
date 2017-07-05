@@ -6,3 +6,89 @@ repositories {
     mavenCentral()
 }
 
+//group 'sample'
+//version '0.0.1-SNAPSHOT'
+//
+//apply plugin: 'java'
+//apply plugin: 'idea'
+//apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'com.moowork.node'
+//apply plugin: 'com.moowork.gulp'
+//
+//
+//version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = 1.8
+//
+//repositories {
+//  mavenCentral()
+//}
+//jar{
+//  from 'dist/dev'
+//  eachFile { details ->
+//    details.path = details.path.startsWith('META-INF') ?: '' + details.path
+//  }
+//  // Jar has duplicate empty folders (see http://issues.gradle.org/browse/GRADLE-1830)
+//  // So we need to set includeEmptyDirs to false
+////  from(fileTree("node_modules/")) {
+////    into "src/main/resources/static/node_modules/"
+////  }
+//  includeEmptyDirs = false
+//  baseName = 'sample-web'
+//}
+//
+//node {
+//  // Version of node to use.
+//  version = '6.10.1'
+//
+//  // Version of npm to use.
+//  npmVersion = '3.10.10'
+//
+//  // Version of Yarn to use.
+//  yarnVersion = '0.21.3'
+//
+//  // Base URL for fetching node distributions (change if you have a mirror).
+//  distBaseUrl = 'https://nodejs.org/dist'
+//
+//  // If true, it will download node using above parameters.
+//  // If false, it will try to use globally installed node.
+//  download = true
+//
+//  // Set the work directory for unpacking node
+//  workDir = file("${project.buildDir}/nodejs")
+//
+//  // Set the work directory for NPM
+//  npmWorkDir = file("${project.buildDir}/npm")
+//
+//  // Set the work directory for Yarn
+//  yarnWorkDir = file("${project.buildDir}/yarn")
+//
+//  // Set the work directory where node_modules should be located
+//  nodeModulesDir = file("${project.projectDir}")
+//}
+//gulp {
+//  workDir = file("${project.projectDir}")
+//}
+//installGulp.dependsOn 'npmInstall'
+//
+//gulp_default.dependsOn 'installGulp'
+//gulp_default.dependsOn 'npmInstall'
+//gulp_default.dependsOn 'yarn'
+//
+//processResources.dependsOn gulp_default
+//
+//gulp_clean.dependsOn 'installGulp'
+//gulp_clean.dependsOn 'npmInstall'
+//gulp_clean.dependsOn 'yarn'
+//
+//task buildDev(type: GulpTask) {
+//  args = ["build.dev", "--color"]
+//}
+//
+//buildDev.dependsOn 'npmInstall'
+//buildDev.dependsOn 'installGulp'
+//buildDev.dependsOn 'yarn'
+//
+//npmInstall{
+//  args = ['--verbose']
+//}
+

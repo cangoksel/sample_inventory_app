@@ -1,10 +1,11 @@
-include 'domain'
 include 'database'
+include 'domain'
+include 'service'
+include 'rest'
+include 'web'
 rootProject.name = 'inventory'
 rootProject.children.each { project ->
     project.buildFileName = "${project.name}.gradle"
 }
-include 'service'
-include 'rest'
-include 'web'
+
 

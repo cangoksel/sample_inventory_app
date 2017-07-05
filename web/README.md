@@ -264,7 +264,7 @@ Please see the [CONTRIBUTING](https://github.com/mgechev/angular-seed/blob/maste
 An [advanced option to this seed exists here](https://github.com/NathanWalker/angular-seed-advanced) which mirrors the latest changes here but adds core support for:
 
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
-- [ngrx/effects](https://github.com/ngrx/effects) Side effect model for @ngrx/store
+- [ngrx/effects](https://github.com/ngrx/effects) Side effect com.github.cangoksel.model for @ngrx/store
 - [ngx-translate](https://github.com/ngx-translate/core) for i18n
   - Usage is optional but on by default
   - Up to you and your team how you want to utilize it. It can be easily removed if not needed.
