@@ -1,13 +1,12 @@
 group 'com.github.cangoksel'
 version '1.0-SNAPSHOT'
 
-
-
 apply plugin: "org.sonarqube"
 
 repositories {
     mavenCentral()
 }
+
 buildscript {
     ext {
         javaMoneyVersion = '1.0'
@@ -16,6 +15,7 @@ buildscript {
         hibernateVersion = properties['hibernate.version']
         hibernateSearchVersion = '5.7.0.Final'
         queryDslVersion = '4.1.4'
+
         // Spring
         springBootVersion = '1.5.2.RELEASE'
 
@@ -28,7 +28,7 @@ buildscript {
         compressVersion = '1.9'
         lombokVersion = '1.16.8'
 
-        // JSFş
+        // JSF
         jsfVersion = '2.2.13'
         primeFacesVersion = '6.0'
         primeFacesExtensionsVersion = '6.0.0'
@@ -79,99 +79,5 @@ buildscript {
         classpath('org.liquibase:liquibase-gradle-plugin:1.2.1')
         classpath("org.postgresql:postgresql:${postgresqlVersion}")
         classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1")
-    }
-}
-
-configure(allprojects) {
-    group = "com.github.cangoksel"
-    apply from: "$rootDir/gradle/versioning.gradle"
-
-    sonarqube {
-        properties {
-            property "sonar.sourceEncoding", "UTF-8"
-            property "sonar.junit.reportsPath", "$buildDir/test-results/"
-            property "sonar.groovy.binaries", "$buildDir/jacoco/"
-        }
-    }
-
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
-    }
-
-    tasks.withType(GroovyCompile) {
-        options.encoding = 'UTF-8'
-    }
-}
-configure(subprojects - project(':database')) {
-    apply plugin: "java"
-    apply plugin: "groovy"
-    apply plugin: "jacoco"
-    apply plugin: "org.springframework.boot"
-    apply plugin: "idea"
-    apply from: "$rootDir/gradle/provided.gradle"
-
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-
-    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-    [compileGroovy, compileTestGroovy]*.options*.encoding = 'UTF-8'
-
-    configurations {
-        compile.exclude module: 'spring-boot-starter-logging'
-    }
-
-    configurations.all({
-        resolutionStrategy {
-            eachDependency { DependencyResolveDetails details ->
-                if (details.requested.group == "org.codehaus.groovy") {
-                    details.useVersion "${groovyVersion}"
-                }
-
-                if (details.requested.group == "org.hibernate" && details.requested.name == "hibernate-entitymanager") {
-                    details.useVersion "${hibernateVersion}"
-                }
-            }
-        }
-    })
-
-    jacoco {
-        toolVersion = "0.7.4.201502262128"
-    }
-
-    jacocoTestReport {
-        reports {
-            xml.enabled false
-            csv.enabled false
-            html.destination "${buildDir}/jacocoHtml"
-        }
-    }
-
-    repositories {
-        jcenter()
-
-    }
-
-    dependencies {
-        // Logging Dependencies
-        //compile('org.springframework.boot:spring-boot-starter-log4j2')
-        compile("ch.qos.logback.contrib:logback-mongodb-classic:0.1.2")
-        compile("com.google.guava:guava:${guavaVersion}")
-
-        compile("javax.money:money-api:${javaMoneyVersion}")
-        compile("org.javamoney:moneta:${javaMoneyVersion}")
-        compile("org.freemarker:freemarker:${freemarkerVersion}")
-
-        provided("org.projectlombok:lombok:$lombokVersion")
-
-        // Testing Dependencies
-        testCompile('org.springframework.boot:spring-boot-starter-test')
-        testCompile("org.codehaus.groovy:groovy-all:${groovyVersion}")
-        testCompile("com.relevantcodes:extentreports:${extentReportVersion}")
-        testCompile("org.spockframework:spock-core:${spockVersion}") {
-            exclude(module: 'junit-dep')
-        }
-        testCompile("org.spockframework:spock-spring:${spockVersion}")
-        testCompile("com.anotherchrisberry:spock-retry:0.6.1")
-        testRuntime("cglib:cglib-nodep:${cglibNodepVersion}")
     }
 }

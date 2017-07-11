@@ -1,4 +1,5 @@
-
+group = "com.github.cangoksel"
+apply from: "$rootDir/gradle/versioning.gradle"
 
 
 

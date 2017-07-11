@@ -1,8 +1,14 @@
-
-
+group = "com.github.cangoksel"
+apply from: "$rootDir/gradle/versioning.gradle"
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'com.bmuschko.docker-remote-api'
+apply plugin: "java"
+apply plugin: "groovy"
+apply plugin: "jacoco"
+apply plugin: "org.springframework.boot"
+apply plugin: "idea"
+apply from: "$rootDir/gradle/provided.gradle"
 sourceCompatibility = 1.8
 
 bootRepackage {
@@ -21,8 +27,64 @@ jar {
       // So we need to set includeEmptyDirs to false
       includeEmptyDirs = false*/
 }
+
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.junit.reportsPath", "$buildDir/test-results/"
+        property "sonar.groovy.binaries", "$buildDir/jacoco/"
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(GroovyCompile) {
+    options.encoding = 'UTF-8'
+}
 compileJava.dependsOn(processResources)
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+[compileGroovy, compileTestGroovy]*.options*.encoding = 'UTF-8'
+
+configurations {
+    compile.exclude module: 'spring-boot-starter-logging'
+}
+
+configurations.all({
+    resolutionStrategy {
+        eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == "org.codehaus.groovy") {
+                details.useVersion "${groovyVersion}"
+            }
+
+            if (details.requested.group == "org.hibernate" && details.requested.name == "hibernate-entitymanager") {
+                details.useVersion "${hibernateVersion}"
+            }
+        }
+    }
+})
+
+jacoco {
+    toolVersion = "0.7.4.201502262128"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+repositories {
+    jcenter()
+
+}
 
 dependencies {
     compile project(":database")
@@ -31,9 +93,9 @@ dependencies {
     compile project(':web')
     compile('org.springframework.security:spring-security-taglibs')
     compile('org.springframework.boot:spring-boot-starter-actuator')
-    compile('org.springframework.boot:spring-boot-autoconfigure')
+    //compile('org.springframework.boot:spring-boot-autoconfigure')
     compile('org.springframework.boot:spring-boot-starter-hateoas')
-    compile('org.springframework.boot:spring-boot-starter-security')
+    //compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-data-mongodb')
     /*compile('org.springframework.boot:spring-boot-starter-undertow')*/
     compile('org.springframework.boot:spring-boot-starter-web')/* {
@@ -87,5 +149,27 @@ dependencies {
     compile("net.sf.barcode4j:barcode4j:2.1")
     compile("com.google.zxing:javase:3.2.1")
     compile("org.apache.poi:poi-ooxml:3.14")
+
+    // Logging Dependencies
+    //compile('org.springframework.boot:spring-boot-starter-log4j2')
+    compile("ch.qos.logback.contrib:logback-mongodb-classic:0.1.2")
+    compile("com.google.guava:guava:${guavaVersion}")
+
+    compile("javax.money:money-api:${javaMoneyVersion}")
+    compile("org.javamoney:moneta:${javaMoneyVersion}")
+    compile("org.freemarker:freemarker:${freemarkerVersion}")
+
+    provided("org.projectlombok:lombok:$lombokVersion")
+
+    // Testing Dependencies
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("org.codehaus.groovy:groovy-all:${groovyVersion}")
+    testCompile("com.relevantcodes:extentreports:${extentReportVersion}")
+    testCompile("org.spockframework:spock-core:${spockVersion}") {
+        exclude(module: 'junit-dep')
+    }
+    testCompile("org.spockframework:spock-spring:${spockVersion}")
+    testCompile("com.anotherchrisberry:spock-retry:0.6.1")
+    testRuntime("cglib:cglib-nodep:${cglibNodepVersion}")
 }
 

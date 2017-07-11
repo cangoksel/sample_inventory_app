@@ -1,7 +1,24 @@
+group = "com.github.cangoksel"
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'liquibase'
 apply from: '../gradle/dbScripts.gradle'
+apply from: "$rootDir/gradle/versioning.gradle"
+
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.junit.reportsPath", "$buildDir/test-results/"
+        property "sonar.groovy.binaries", "$buildDir/jacoco/"
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(GroovyCompile) {
+    options.encoding = 'UTF-8'
+}
 
 liquibase {
     activities {

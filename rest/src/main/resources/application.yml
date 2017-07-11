@@ -1,5 +1,7 @@
 security:
-  com.github.cangoksel.user:
+  basic:
+    enabled: false
+  user:
     name: admin
     password: admin
 spring:
@@ -34,10 +36,6 @@ spring:
     serialization: {
       'write_dates_as_timestamps': 'false'
     }
-  resources:
-     static-locations: ['classpath:/BOOT-INF/classes/static/','classpath:/classes/static/','classpath:/static/','classpath:/public/','classpath:/resources/','classpath:/META-INF/resources/', 'file:../web/dist/dev/','file:../../../../../web/dist/dev/','file:../../../../web/dist/dev/', 'file:../../../web/dist/dev/','file:../../web/dist/dev/']
-server:
-  servlet-path: '/api'
 logging:
   level: {
     'root': 'info',
@@ -50,10 +48,6 @@ logging:
 management:
   context-path: '/management'
 
-ptt:
-  kullaniciadi: 'public_user'
-  sifre: 'ykr-1975*219355!-tc'
-  musteriid: '1975380401'
 
 uyap:
   dosyaBilgileriAlindiYap: false
@@ -62,7 +56,7 @@ smtp:
   host: 'localhost'
   username: ''
   password: ''
-  from: 'legalite@innova.com.tr'
+  from: 'a@a.com'
 liquibase:
   change-log: 'classpath:/db/changelog/db.changelog-master.xml'
   contexts: 'inventory,test'
@@ -77,10 +71,10 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: inventoryuser
     password: inventoryuser1
-    url: 'jdbc:postgresql://legalitedb:5432/inventory'
+    url: 'jdbc:postgresql://inventorydb:5432/inventory'
   data:
     mongodb:
-      uri: mongodb://legalitemongodb/inventory
+      uri: mongodb://inventorymongodb/inventory
 liquibase:
   change-log: 'classpath:/db/changelog/db.changelog-master.xml'
   contexts: 'inventory'
