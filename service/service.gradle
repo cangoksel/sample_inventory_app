@@ -69,7 +69,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-data-mongodb')
     compile('org.springframework.boot:spring-boot-starter-mail')
-    //compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-security')
 
     compile("org.mnode.ical4j:ical4j:2.0-beta1") {
         exclude(group: "biz.aQute.bnd", module: "bndlib")
@@ -80,15 +80,8 @@ dependencies {
         exclude(group: 'org.apache.cxf', module: 'cxf-rt-rs-security-oauth')
     }
     compile("org.apache.cxf:cxf-rt-rs-client:${cxfVersion}")
-    runtime("org.apache.camel:camel-jaxb:${camelVersion}")
-    runtime("org.apache.camel:camel-http4:${camelVersion}")
-    runtime("org.apache.camel:camel-quartz2:${camelVersion}")
-    runtime("org.apache.camel:camel-jpa:${camelVersion}")
-    runtime("org.apache.camel:camel-mail:${camelVersion}") {
-        exclude(group: "javax.mail", module: "mail")
-    }
-    testCompile("org.apache.camel:camel-test:${camelVersion}")
-    testRuntime("javax.servlet:javax.servlet-api:3.1.0")
+
+
     compile("com.squareup.retrofit2:retrofit:${retrofitVersion}")
     compile("com.squareup.retrofit2:converter-jackson:${retrofitVersion}")
     compile("org.apache.tika:tika-core:1.13")
@@ -102,6 +95,14 @@ dependencies {
     compile("org.javamoney:moneta:${javaMoneyVersion}")
     compile("org.freemarker:freemarker:${freemarkerVersion}")
 
+    runtime("org.apache.camel:camel-jaxb:${camelVersion}")
+    runtime("org.apache.camel:camel-http4:${camelVersion}")
+    runtime("org.apache.camel:camel-quartz2:${camelVersion}")
+    runtime("org.apache.camel:camel-jpa:${camelVersion}")
+    runtime("org.apache.camel:camel-mail:${camelVersion}") {
+        exclude(group: "javax.mail", module: "mail")
+    }
+
     provided("org.projectlombok:lombok:$lombokVersion")
 
     // Testing Dependencies
@@ -113,5 +114,7 @@ dependencies {
     }
     testCompile("org.spockframework:spock-spring:${spockVersion}")
     testCompile("com.anotherchrisberry:spock-retry:0.6.1")
+    testCompile("org.apache.camel:camel-test:${camelVersion}")
+    testRuntime("javax.servlet:javax.servlet-api:3.1.0")
     testRuntime("cglib:cglib-nodep:${cglibNodepVersion}")
 }
