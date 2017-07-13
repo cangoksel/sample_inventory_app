@@ -18,6 +18,10 @@ bootRepackage {
 jar {
     baseName = 'inventory-rest'
 
+
+//    from {
+//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
     /*  from 'dist/dev'
       eachFile { details ->
 
