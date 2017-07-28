@@ -263,9 +263,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         ).isPresent();
     }
 
-    @Override
-    public Token createAccessToken(KullaniciInfo principal) {
-        Token accessToken = new Token(principal);
-        return tokenRepository.save(accessToken);
-    }
+
 }

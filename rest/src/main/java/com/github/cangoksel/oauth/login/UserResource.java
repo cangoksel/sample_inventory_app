@@ -49,37 +49,5 @@ public class UserResource {
         return userService.fetchKullaniciByEposta(userDetails.getUsername());
     }
 
-    /**
-     * Authenticates a user and creates an access token.
-     *
-     * @param username The name of the user.
-     * @param password The password of the user.
-     * @return The generated access token.
-     */
 
-
-    @PostMapping(path = "/authenticate", produces = "application/json;charset=UTF-8")
-    public Token authenticate(@RequestBody UserBilgi info) {
-
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(info.getUsername(), info.getPassword());
-        Authentication authentication = this.authManager.authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        Object principal = authentication.getPrincipal();
-        if (!(principal instanceof User)) {
-            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
-        }
-        Kullanici kullanici = userService.fetchKullaniciByEposta(((User) principal).getUsername());
-        return this.userService.createAccessToken((KullaniciInfo) kullanici);
-    }
-
-    private Map<String, Boolean> createRoleMap(UserDetails userDetails) {
-        Map<String, Boolean> roles = new HashMap<>();
-        for (GrantedAuthority authority : userDetails.getAuthorities()) {
-            roles.put(authority.getAuthority(), Boolean.TRUE);
-        }
-
-        return roles;
-    }
 }

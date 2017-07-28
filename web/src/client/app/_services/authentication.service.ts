@@ -2,6 +2,7 @@
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import {User} from "../_models/user";
 
 @Injectable()
 export class AuthenticationService {
@@ -15,7 +16,10 @@ export class AuthenticationService {
         return this.http.post('/api/login', formData)
             .map((response: Response) => {
                 if (response.ok) {
-                  return "success";
+                  localStorage.setItem('currentUser', JSON.stringify(username));
+                  return new User(username);
+                }else {
+                  localStorage.removeItem('currentUser');
                 }
                 return "failure";
             });

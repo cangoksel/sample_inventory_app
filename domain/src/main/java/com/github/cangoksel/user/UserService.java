@@ -60,5 +60,4 @@ public interface UserService {
 
     boolean checkValidIdAndToken(UUID kullaniciId, UUID token);
 
-    Token createAccessToken(KullaniciInfo principal);
 }
