@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 /**
@@ -22,16 +23,13 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Autowired
-    private MySavedRequestAwareAuthenticationSuccessHandler authenticationSuccessHandler;
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
 
-        auth.inMemoryAuthentication()
-                .withUser("temporary").password("temporary").roles("ADMIN")
-                .and()
-                .withUser("user").password("userPass").roles("USER");
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -42,13 +40,15 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/api/login").permitAll()
+                .antMatchers("/api/logout").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .and()
-                .formLogin()
-                .successHandler(authenticationSuccessHandler)
-                .failureHandler(new SimpleUrlAuthenticationFailureHandler())
+                .formLogin().loginProcessingUrl("/api/login")
+                .successHandler(mySuccessHandler())
+                .failureHandler(myFailureHandler())
                 .and()
-                .logout();
+                .logout().logoutUrl("/api/logout");
     }
 
     @Bean

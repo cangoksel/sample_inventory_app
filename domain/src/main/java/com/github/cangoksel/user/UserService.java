@@ -5,6 +5,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
@@ -58,4 +59,6 @@ public interface UserService {
     Kullanici fetchJobUser();
 
     boolean checkValidIdAndToken(UUID kullaniciId, UUID token);
+
+    Token createAccessToken(KullaniciInfo principal);
 }

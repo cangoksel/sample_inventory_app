@@ -1,56 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { NameListService } from '../shared/name-list/name-list.service';
+﻿import { Component, OnInit } from '@angular/core';
 
-/**
- * This class represents the lazy loaded HomeComponent.
- */
+import { User } from '../_models/index';
+import { UserService } from '../_services/index';
+
 @Component({
-  moduleId: module.id,
-  selector: 'sd-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
+    moduleId: module.id,
+    templateUrl: 'home.component.html'
 })
+
 export class HomeComponent implements OnInit {
+    currentUser: User;
+    users: User[] = [];
 
-  newName: string = '';
-  errorMessage: string;
-  names: any[] = [];
+    constructor(private userService: UserService) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
 
-  /**
-   * Creates an instance of the HomeComponent with the injected
-   * NameListService.
-   *
-   * @param {NameListService} nameListService - The injected NameListService.
-   */
-  constructor(public nameListService: NameListService) {}
+    ngOnInit() {
+        this.loadAllUsers();
+    }
 
-  /**
-   * Get the names OnInit
-   */
-  ngOnInit() {
-    this.getNames();
-  }
+    deleteUser(id: number) {
+        this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
+    }
 
-  /**
-   * Handle the nameListService observable
-   */
-  getNames() {
-    this.nameListService.get()
-      .subscribe(
-        names => this.names = names,
-        error => this.errorMessage = <any>error
-      );
-  }
-
-  /**
-   * Pushes a new name onto the names array
-   * @return {boolean} false to prevent default form submit behavior to refresh the page.
-   */
-  addName(): boolean {
-    // TODO: implement nameListService.post
-    this.names.push(this.newName);
-    this.newName = '';
-    return false;
-  }
-
+    private loadAllUsers() {
+        this.userService.getAll().subscribe(users => { this.users = users; });
+    }
 }

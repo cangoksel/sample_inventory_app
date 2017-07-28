@@ -1,9 +1,3 @@
-security:
-  basic:
-    enabled: true
-  user:
-    name: inventory
-    password: inventory
 spring:
   profiles: default
   jpa:

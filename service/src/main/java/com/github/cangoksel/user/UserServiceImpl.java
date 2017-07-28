@@ -51,6 +51,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private TokenRepository tokenRepository;
 
+
+
     protected UserServiceImpl() {
     }
 
@@ -259,5 +261,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             LocalDateTime.now().minusHours(Token.EXPIRATION_TIME),
             LocalDateTime.now()
         ).isPresent();
+    }
+
+    @Override
+    public Token createAccessToken(KullaniciInfo principal) {
+        Token accessToken = new Token(principal);
+        return tokenRepository.save(accessToken);
     }
 }
