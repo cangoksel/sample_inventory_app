@@ -15,4 +15,10 @@ export class AppComponent {
   constructor() {
     console.log('Environment config', Config);
   }
+  screen(width:any) {
+    return ( width < 700 ) ? 'sm' : 'lg';
+  }
+  helloWorld() {
+    alert('Hello world!');
+  }
 }

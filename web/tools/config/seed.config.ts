@@ -408,11 +408,23 @@ export class SeedConfig {
       // For test config
       'dist/dev/': '/base/dist/dev/',
       '': 'node_modules/'
+      ,
+      // devextreme & devextreme deps
+      'devextreme': 'node_modules/devextreme',                   // <== add this line
+      'jquery': 'node_modules/jquery/dist/jquery.min.js',        // <== add this line
+      'jszip': 'node_modules/jszip/dist/jszip.min.js',           // <== add this line
+      'devextreme-angular': 'node_modules/devextreme-angular',   // <== add this line
+      // other libraries
+      'rxjs': 'node_modules/rxjs',
+      'angular-in-memory-web-api': 'node_modules/angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
     },
     packages: {
       [this.BOOTSTRAP_DIR]: {
         defaultExtension: 'js'
       }
+      ,
+      'devextreme-angular':         { main: 'index.js', defaultExtension: 'js' }, // <== add this line
+      'devextreme':                 { defaultExtension: 'js' }                    // <== add this line
     }
   };
 

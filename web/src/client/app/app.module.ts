@@ -19,6 +19,8 @@ import {AuthenticationService} from "./_services/authentication.service";
 import {AlertService} from "./_services/alert.service";
 import {AuthGuard} from "./_guards/auth.guard";
 
+import {DxButtonModule, DxResponsiveBoxModule} from 'devextreme-angular';
+
 
 @NgModule({
   imports: [BrowserModule,
@@ -26,6 +28,9 @@ import {AuthGuard} from "./_guards/auth.guard";
     AppRoutingModule,
     AboutModule,
     FormsModule,
+
+    DxButtonModule,
+    DxResponsiveBoxModule,
     routing,
     SharedModule.forRoot()],
   declarations: [AppComponent,
