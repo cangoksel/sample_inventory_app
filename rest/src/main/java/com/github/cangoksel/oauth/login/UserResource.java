@@ -50,4 +50,16 @@ public class UserResource {
     }
 
 
+    @PostMapping(path = "/getUser", produces = MediaType.APPLICATION_JSON)
+    public Kullanici getUser(String username) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        if (!(principal instanceof UserDetails)) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        }
+        UserDetails userDetails = (UserDetails) principal;
+
+        return userService.fetchKullaniciByEposta(userDetails.getUsername());
+    }
+
 }

@@ -1,12 +1,47 @@
 <!--<router-outlet></router-outlet>-->
 <!-- main app container -->
+<dx-responsive-box
+  height="auto"
+  (onOptionChanged)="adaptation()"
+  [(screenByWidth)]="getScreen">
 
-<div id="page">
-  <!--<sd-toolbar></sd-toolbar>-->
-  <!--<sd-navbar></sd-navbar>-->
-  <alert></alert>
-  <router-outlet></router-outlet>
-</div>
+  <dxi-row [ratio]="1"></dxi-row>
+  <dxi-row [ratio]="1"></dxi-row>
+  <dxi-row [ratio]="1"></dxi-row>
+
+  <dxi-item>
+    <dxi-location
+      [row]="0"
+      [col]="0"
+      [colspan]="1"
+      screen="lg md sm xs">
+    </dxi-location>
+    <!--<sd-toolbar></sd-toolbar>-->
+    <!--<sd-navbar></sd-navbar>-->
+    <!--<header-app [adaptOptions]="adaptOptions"></header-app>-->
+  </dxi-item>
+  <dxi-item id="page">
+    <dxi-location
+      [row]="1"
+      [col]="0"
+      [colspan]="1"
+      screen="lg md sm xs">
+    </dxi-location>
+    <div id="page">
+      <alert></alert>
+      <router-outlet></router-outlet>
+    </div>
+  </dxi-item>
+  <dxi-item>
+    <dxi-location
+      [row]="2"
+      [col]="0"
+      [colspan]="1"
+      screen="lg md sm xs">
+    </dxi-location>
+    <!--<footer-app></footer-app>-->
+  </dxi-item>
+
 
 
 
