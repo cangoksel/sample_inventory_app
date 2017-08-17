@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.envers.AuditJoinTable;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @Audited
@@ -19,9 +16,9 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 public class UrunKodu extends AbstractVersionedEntity {
 
-
+    @Column
     private String urunKoduAdi;
-
+    @Column
     private String urunKodu;
 
     @OneToOne

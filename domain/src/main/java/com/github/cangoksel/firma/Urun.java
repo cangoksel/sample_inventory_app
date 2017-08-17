@@ -19,7 +19,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class Urun extends AbstractVersionedEntity {
 
-
     @OneToOne
     @JoinColumn(name = "URUN_ALT_KODU_ID", foreignKey = @ForeignKey(name = "FK_URUN_URUN_ALT_KODU"))
     @AuditJoinTable(name = "URUN_URUN_ALT_KODU_L")
@@ -62,12 +61,6 @@ public class Urun extends AbstractVersionedEntity {
     private String endikasyonlari;
     @Column
     private String formlari;
-
-    @Column
-    @Enumerated(EnumType.STRING)
-    private UrunGrubu urunGrubu;
-
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "URUN_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_URUN_BELGE"))
     @AuditJoinTable(name = "URUN_BELGE_L")

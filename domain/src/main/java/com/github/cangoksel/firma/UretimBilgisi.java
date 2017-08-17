@@ -17,9 +17,9 @@ import javax.persistence.*;
 public class UretimBilgisi extends AbstractVersionedEntity {
 
     @OneToOne
-    @JoinColumn(name = "URUN_ALT_KODU_ID", foreignKey = @ForeignKey(name = "FK_URETIM_BILGILERI_URUN_ALT__KODU"))
-    @AuditJoinTable(name = "URETIM_BILGILERI_URUN_ALT_KODU_L")
-    private UrunAltKodu urunAltKodu;
+    @JoinColumn(name = "URUN_ID", foreignKey = @ForeignKey(name = "FK_URETIM_BILGILERI_URUN_KODU"))
+    @AuditJoinTable(name = "URETIM_BILGILERI_URUN_L")
+    private Urun urun;
 
     @Column
     private String firmaAciklamasi;
