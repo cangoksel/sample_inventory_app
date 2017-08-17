@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import java.lang.reflect.Modifier;
 import java.time.LocalDate;
 
-public class SayisalVeriRow extends AbstractVersionedEntity {
+public class SayisalVeri extends AbstractVersionedEntity {
 
     @OneToOne
     @JoinColumn(name = "URUN_ID", foreignKey = @ForeignKey(name = "FK_SAYISAL_VERI_URUN"))
