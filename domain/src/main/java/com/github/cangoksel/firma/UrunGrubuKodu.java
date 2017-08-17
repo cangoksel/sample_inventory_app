@@ -20,5 +20,5 @@ public class UrunGrubuKodu extends AbstractVersionedEntity{
     private String urunGrubuKoduAdi;
 
     @Column
-    private String urunGrubuKodu;
+    private String urunGrubuKod;
 }

@@ -1,17 +1,23 @@
 package com.github.cangoksel.firma;
 
 import com.github.cangoksel.common.entity.AbstractVersionedEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Columns;
 import org.hibernate.envers.AuditJoinTable;
+import org.hibernate.envers.Audited;
 import org.javamoney.moneta.Money;
 
-import javax.persistence.Column;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.lang.reflect.Modifier;
 import java.time.LocalDate;
 
+@Entity
+@Audited
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SayisalVeri extends AbstractVersionedEntity {
 
     @OneToOne
@@ -19,7 +25,7 @@ public class SayisalVeri extends AbstractVersionedEntity {
     @AuditJoinTable(name = "SAYISAL_VERI_URUN_L")
     private Urun urun;
     @Column
-    private LocalDate localDate;
+    private LocalDate yil;
     @Column
     private Long ithalatMiktari;
     @Column

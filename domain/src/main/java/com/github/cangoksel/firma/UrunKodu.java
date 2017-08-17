@@ -19,7 +19,7 @@ public class UrunKodu extends AbstractVersionedEntity {
     @Column
     private String urunKoduAdi;
     @Column
-    private String urunKodu;
+    private String urunKod;
 
     @OneToOne
     @JoinColumn(name = "URUN_GRUBU_KODU_ID", foreignKey = @ForeignKey(name = "FK_URUN_KODU_URUN_GRUBU_KODU"))

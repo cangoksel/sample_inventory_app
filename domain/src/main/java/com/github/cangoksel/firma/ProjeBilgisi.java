@@ -1,12 +1,21 @@
 package com.github.cangoksel.firma;
 
+import com.github.cangoksel.common.entity.AbstractVersionedEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.AuditJoinTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 
-public class ProjeBilgisi {
+@Entity
+@Audited
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProjeBilgisi extends AbstractVersionedEntity {
 
     @Column
     private String konusu;
