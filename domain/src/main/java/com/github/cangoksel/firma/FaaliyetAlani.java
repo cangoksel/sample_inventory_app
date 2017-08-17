@@ -1,9 +1,10 @@
-package com.github.cangoksel;
+package com.github.cangoksel.firma;
 
 import com.github.cangoksel.common.utils.Displayable;
 
 public enum FaaliyetAlani implements Displayable {
     ARGE("Arge"),
+    URETIM("Üretim"),
     YAZILIM("Yazılım"),
     HIZMET("Hizmet");
 

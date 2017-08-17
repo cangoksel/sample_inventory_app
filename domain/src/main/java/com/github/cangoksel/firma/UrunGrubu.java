@@ -1,4 +1,4 @@
-package com.github.cangoksel;
+package com.github.cangoksel.firma;
 
 import com.github.cangoksel.common.utils.Displayable;
 

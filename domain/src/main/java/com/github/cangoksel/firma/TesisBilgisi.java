@@ -1,7 +1,6 @@
 package com.github.cangoksel.firma;
 
 import com.github.cangoksel.common.entity.AbstractVersionedEntity;
-import com.github.cangoksel.il.Ulke;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,7 @@ import javax.persistence.Enumerated;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TesisBilgileri extends AbstractVersionedEntity {
+public class TesisBilgisi extends AbstractVersionedEntity {
 
     @Column
     private String uretimAlani;

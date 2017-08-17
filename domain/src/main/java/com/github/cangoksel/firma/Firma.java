@@ -1,67 +1,35 @@
 package com.github.cangoksel.firma;
 
-import com.github.cangoksel.FaaliyetAlani;
-import com.github.cangoksel.FaaliyetKodu;
-import com.github.cangoksel.Kisi;
-import com.github.cangoksel.UrunGrubu;
 import com.github.cangoksel.common.entity.AbstractVersionedEntity;
-import com.github.cangoksel.common.validation.constraints.Telefon;
-import com.github.cangoksel.il.Il;
-import com.github.cangoksel.user.Kullanici;
-import org.hibernate.envers.AuditJoinTable;
-import org.hibernate.validator.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
+@Audited
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Firma extends AbstractVersionedEntity {
-    @Column
-    String unvan;
-    @Column
-    @Enumerated(EnumType.STRING)
-    Il il;
-    @Column
-    LocalDate kurulusTarihi;
-    @OneToOne
-    @JoinColumn(name = "KAYDI_OLUSTURAN_KISI_ID", foreignKey = @ForeignKey(name = "FK_FIRMA_KAYDI_OLUSTURAN_KISI"))
-    @AuditJoinTable(name = "FIRMA_KAYDI_OLUSTURAN_KISI_L")
-    Kisi kaydiOlusturanKisi;
-    @OneToOne
-    @JoinColumn(name = "YETKILI_KISI_ID", foreignKey = @ForeignKey(name = "FK_FIRMA_YETKILI_KISI"))
-    @AuditJoinTable(name = "YETKILI_KISI_L")
-    Kisi yetkiliKisi;
-    @Column
-    @Enumerated(EnumType.STRING)
-    FaaliyetAlani faaliyetAlani;
-    @Column
-    @Enumerated(EnumType.STRING)
-    UrunGrubu urunGrubu;
-    @Column
-    String sektorBilgisi;
-    @OneToOne
-    @JoinColumn(name = "FAALİYET_KODU_ID", foreignKey = @ForeignKey(name = "FK_FIRMA_FAALİYET_KODU_"))
-    @AuditJoinTable(name = "FIRMA_FAALİYET_KODU_L")
-    FaaliyetKodu faaliyetKodu;
-    @Column
-    boolean argeBirimiVarMi;
-    @Column
-    String ticaretSicilNo;
-    @Column
-    String vergiNo;
-    @Column
-    String acikAdress;
-    @Column
-    @Telefon
-    String telefon;
-    @Column
-    @Telefon
-    String fax;
-    @Column
-    @Email
-    String email;
-    @Column
-    String webAdresi;
 
 
+    private boolean firmaYetkinlikCalismasiYepildiMi;
+
+    private GenelFirmaBilgileri genelBilgiler;
+
+    private IsyeriBilgileri isyeriBilgileri;
+
+    private OrtaklikBilgileri ortaklikBilgileri;
+
+    private Set<ProjeBilgisi> projeBilgileri;
+
+    private FinansalBilgileri finansalBilgileri;
+
+    private Set<TesisBilgisi> tesisBilgisileri;
+
+    private Set<UretimBilgisi> uretimBilgileri;
 }
