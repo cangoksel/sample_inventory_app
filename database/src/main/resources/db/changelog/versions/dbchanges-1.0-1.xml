@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet id="201606131405-00" author="tozyurek" context="legalite">
+    <changeSet id="201606131405-00" author="tozyurek" context="inventory">
         <!-- <delete tableName="faiz_orani" />
 
          <insert tableName="faiz_orani">
@@ -19,7 +19,7 @@
     </changeSet>
 
 
-    <changeSet id="201606241454-00" author="mersoy" context="legalite">
+    <changeSet id="201606241454-00" author="mersoy" context="inventory">
         <!-- <update tableName="dokum_sablonu">
              <column name="icerik"
                      value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;line-height:20.8px; width:612px&quot;&gt;
@@ -184,5 +184,27 @@
             <column name="rol_id" value="e6ae9bdc-4b21-411b-8fc7-0b686547cdb3" />
         </insert>
     </changeSet>-->
-
+    <changeSet id="201708161454-00" author="cangoksel" context="inventory">
+        <createTable tableName="firma">
+            <column name="id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
+            <column name="version" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="unvan" type="VARCHAR(255)" />
+            <column name="il" type="VARCHAR(255)" />
+            <column name="kurulusTarihi" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="kaydiOlusturanKisi" type="BOOL" />
+            <column name="yetkiliKisi" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="faaliyetAlani" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="sektorBilgisi" type="VARCHAR(255)" />
+            <column name="sifre" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="soyad" type="VARCHAR(255)" />
+            <column name="user_name" type="VARCHAR(255)" />
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
