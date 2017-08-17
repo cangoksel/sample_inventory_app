@@ -1,86 +1,1800 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet id="201605091557-00" author="cangoksel" context="inventory" dbms="postgresql">
-
-        <createSequence sequenceName="aa" />
-
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="gcan (generated)" id="1502979443129-1">
+        <createSequence sequenceName="aa"/>
     </changeSet>
-
-    <changeSet author="cangoksel" id="201605091558-00" context="inventory">
-        <createTable tableName="kullanici">
+    <changeSet author="gcan (generated)" id="1502979443129-2">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-3">
+        <createTable tableName="act_kodu">
             <column name="id" type="UUID">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
             <column name="version" type="BIGINT">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            <column name="ad" type="VARCHAR(255)" />
-            <column name="eposta" type="VARCHAR(255)" />
-            <column name="hesap_etkin" type="BOOL" />
-            <column name="hesap_kilitli" type="BOOL" />
-            <column name="ilk_kayit_tarihi" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
-            <column name="last_login" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
-            <column name="ldap_eposta" type="VARCHAR(255)" />
-            <column name="sifre" type="VARCHAR(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="soyad" type="VARCHAR(255)" />
-            <column name="user_name" type="VARCHAR(255)" />
+            <column name="kod" type="VARCHAR(255)"/>
         </createTable>
-        <createTable tableName="rol">
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-4">
+        <createTable tableName="act_kodu_l">
             <column name="id" type="UUID">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
-            <column name="version" type="BIGINT">
-                <constraints nullable="false" />
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
             </column>
-            <column name="aciklama" type="VARCHAR(255)" />
-            <column name="is_sistem_rolu" type="BOOL" />
-            <column name="kod" type="VARCHAR(255)" />
-            <column name="rol_tipi" type="VARCHAR(255)" />
-            <column name="musteri_id" type="UUID" />
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="kod" type="VARCHAR(255)"/>
         </createTable>
-        <createTable tableName="kullanici_rol">
-            <column name="kullanici_id" type="UUID">
-                <constraints nullable="false" />
-            </column>
-            <column name="rol_id" type="UUID">
-                <constraints nullable="false" />
-            </column>
-        </createTable>
-        <createTable tableName="yetki">
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-5">
+        <createTable tableName="adres">
             <column name="id" type="UUID">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
             <column name="version" type="BIGINT">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            <column name="aciklama" type="VARCHAR(255)" />
-            <column name="kod" type="VARCHAR(255)" />
+            <column name="acik_adres" type="VARCHAR(255)"/>
+            <column name="il" type="VARCHAR(255)"/>
+            <column name="ulke" type="VARCHAR(255)"/>
         </createTable>
-        <createTable tableName="rol_yetki">
-            <column name="rol_id" type="UUID">
-                <constraints nullable="false" />
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-6">
+        <createTable tableName="adres_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
             </column>
-            <column name="yetki_id" type="UUID">
-                <constraints nullable="false" />
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
             </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="acik_adres" type="VARCHAR(255)"/>
+            <column name="il" type="VARCHAR(255)"/>
+            <column name="ulke" type="VARCHAR(255)"/>
         </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-7">
         <createTable tableName="belge">
             <column name="id" type="UUID">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            <column defaultValueBoolean="false" name="deleted" type="BOOL" />
-            <column name="belge_adi" type="VARCHAR(255)" />
-            <column name="belge_boyutu" type="BIGINT" />
-            <column name="belge_tarihi" type="date" />
-            <column name="belge_tipi" type="VARCHAR(255)" />
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="aciklama" type="VARCHAR(255)"/>
+            <column name="belge_adi" type="VARCHAR(255)"/>
+            <column name="belge_boyutu" type="BIGINT"/>
+            <column name="belge_tipi" type="VARCHAR(255)"/>
+            <column name="khy_id" type="VARCHAR(255)"/>
+            <column name="olusturma_zamani" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="silinebilir_mi" type="BOOL"/>
+            <column name="urun_id" type="UUID"/>
+            <column name="belge_id" type="UUID"/>
         </createTable>
-</changeSet>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-8">
+        <createTable tableName="belge_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="aciklama" type="VARCHAR(255)"/>
+            <column name="belge_adi" type="VARCHAR(255)"/>
+            <column name="belge_boyutu" type="BIGINT"/>
+            <column name="belge_tipi" type="VARCHAR(255)"/>
+            <column name="khy_id" type="VARCHAR(255)"/>
+            <column name="olusturma_zamani" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="silinebilir_mi" type="BOOL"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-9">
+        <createTable tableName="calisan_sayi_bilgisi">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calisan_tipi" type="VARCHAR(255)"/>
+            <column name="kisi_sayisi" type="BIGINT"/>
+            <column name="calisan_sayi_bilgisi_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-10">
+        <createTable tableName="calisan_sayi_bilgisi_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="calisan_tipi" type="VARCHAR(255)"/>
+            <column name="kisi_sayisi" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-11">
+        <createTable tableName="ekran_ziyareti">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="view_class" type="VARCHAR(255)"/>
+            <column name="ziyaret_eden_kullanici" type="VARCHAR(255)"/>
+            <column name="ziyaret_zamani" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-12">
+        <createTable tableName="faaliyet_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="alan_adi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-13">
+        <createTable tableName="faaliyet_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="alan_adi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-14">
+        <createTable tableName="finansal_bilgiler_ihracat_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ihracat_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-15">
+        <createTable tableName="finansal_bilgiler_yillik_ciro_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="yillik_ciro_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-16">
+        <createTable tableName="finansal_bilgileri">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ihracat_var_mi" type="BOOL"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-17">
+        <createTable tableName="finansal_bilgileri_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="ihracat_var_mi" type="BOOL"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-18">
+        <createTable tableName="firma">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firma_yetkinlik_calismasi_yepildi_mi" type="BOOL"/>
+            <column name="finansal_bilgileri_id" type="UUID"/>
+            <column name="genel_firma_bilgiler_id" type="UUID"/>
+            <column name="isyeri_bilgileri_id" type="UUID"/>
+            <column name="ortaklik_bilgileri_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-19">
+        <createTable tableName="firma_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="firma_yetkinlik_calismasi_yepildi_mi" type="BOOL"/>
+            <column name="finansal_bilgileri_id" type="UUID"/>
+            <column name="genel_firma_bilgiler_id" type="UUID"/>
+            <column name="isyeri_bilgileri_id" type="UUID"/>
+            <column name="ortaklik_bilgileri_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-20">
+        <createTable tableName="firma_proje_bilgisi_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="proje_bilgisi_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-21">
+        <createTable tableName="firma_tesis_bilgisi_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tesis_bilgisi_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-22">
+        <createTable tableName="firma_uretim_bilgisi_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uretim_bilgisi_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-23">
+        <createTable tableName="genel_firma_bilgileri">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="acik_adress" type="VARCHAR(255)"/>
+            <column name="arge_birimi_var_mi" type="BOOL"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="faaliyet_alani" type="VARCHAR(255)"/>
+            <column name="fax" type="VARCHAR(255)"/>
+            <column name="firma_unvan" type="VARCHAR(255)"/>
+            <column name="il" type="VARCHAR(255)"/>
+            <column name="kurulus_tarihi" type="date"/>
+            <column name="saglik_sektorunde_mi" type="BOOL"/>
+            <column name="sektor_bilgisi" type="VARCHAR(255)"/>
+            <column name="telefon" type="VARCHAR(255)"/>
+            <column name="telefon2" type="VARCHAR(255)"/>
+            <column name="ticaret_sicil_no" type="VARCHAR(255)"/>
+            <column name="ulke" type="VARCHAR(255)"/>
+            <column name="urun_grubu" type="VARCHAR(255)"/>
+            <column name="vergi_no" type="VARCHAR(255)"/>
+            <column name="web_adresi" type="VARCHAR(255)"/>
+            <column name="adres_id" type="UUID"/>
+            <column name="faali̇yet_kodu_id" type="UUID"/>
+            <column name="kaydi_olusturan_kisi_id" type="UUID"/>
+            <column name="yetkili_kisi_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-24">
+        <createTable tableName="genel_firma_bilgileri_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="acik_adress" type="VARCHAR(255)"/>
+            <column name="arge_birimi_var_mi" type="BOOL"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="faaliyet_alani" type="VARCHAR(255)"/>
+            <column name="fax" type="VARCHAR(255)"/>
+            <column name="firma_unvan" type="VARCHAR(255)"/>
+            <column name="il" type="VARCHAR(255)"/>
+            <column name="kurulus_tarihi" type="date"/>
+            <column name="saglik_sektorunde_mi" type="BOOL"/>
+            <column name="sektor_bilgisi" type="VARCHAR(255)"/>
+            <column name="telefon" type="VARCHAR(255)"/>
+            <column name="telefon2" type="VARCHAR(255)"/>
+            <column name="ticaret_sicil_no" type="VARCHAR(255)"/>
+            <column name="ulke" type="VARCHAR(255)"/>
+            <column name="urun_grubu" type="VARCHAR(255)"/>
+            <column name="vergi_no" type="VARCHAR(255)"/>
+            <column name="web_adresi" type="VARCHAR(255)"/>
+            <column name="adres_id" type="UUID"/>
+            <column name="faali̇yet_kodu_id" type="UUID"/>
+            <column name="kaydi_olusturan_kisi_id" type="UUID"/>
+            <column name="yetkili_kisi_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-25">
+        <createTable tableName="gtip_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-26">
+        <createTable tableName="gtip_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-27">
+        <createTable tableName="ihracat">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="miktar" type="BIGINT"/>
+            <column name="tutar" type="numeric(19, 2)"/>
+            <column name="tutar_pb" type="VARCHAR(3)"/>
+            <column name="yapilan_ulke" type="VARCHAR(255)"/>
+            <column name="yil" type="date"/>
+            <column name="ihracat_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-28">
+        <createTable tableName="ihracat_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="miktar" type="BIGINT"/>
+            <column name="tutar" type="numeric(19, 2)"/>
+            <column name="tutar_pb" type="VARCHAR(3)"/>
+            <column name="yapilan_ulke" type="VARCHAR(255)"/>
+            <column name="yil" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-29">
+        <createTable tableName="isbirligi_firma">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firma_adi" type="VARCHAR(255)"/>
+            <column name="isbirligi_konsu" type="VARCHAR(255)"/>
+            <column name="isbirligi_firma_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-30">
+        <createTable tableName="isbirligi_firma_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="firma_adi" type="VARCHAR(255)"/>
+            <column name="isbirligi_konsu" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-31">
+        <createTable tableName="isyeri_bilgileri">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-32">
+        <createTable tableName="isyeri_bilgileri_belge_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="belge_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-33">
+        <createTable tableName="isyeri_bilgileri_calisan_sayi_bilgisi_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calisan_sayi_bilgisi_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-34">
+        <createTable tableName="isyeri_bilgileri_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-35">
+        <createTable tableName="isyeribilgileri_kurulus_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kurulus_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-36">
+        <createTable tableName="kisi">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="adi" type="VARCHAR(255)"/>
+            <column name="soyadi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-37">
+        <createTable tableName="kisi_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="adi" type="VARCHAR(255)"/>
+            <column name="soyadi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-38">
+        <createTable tableName="kullanici">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ad" type="VARCHAR(255)"/>
+            <column name="eposta" type="VARCHAR(255)"/>
+            <column name="hesap_etkin" type="BOOL"/>
+            <column name="hesap_kilitli" type="BOOL"/>
+            <column name="ilk_kayit_tarihi" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="last_login" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="ldap_eposta" type="VARCHAR(255)"/>
+            <column name="sifre" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="soyad" type="VARCHAR(255)"/>
+            <column name="user_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-39">
+        <createTable tableName="kullanici_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="ad" type="VARCHAR(255)"/>
+            <column name="eposta" type="VARCHAR(255)"/>
+            <column name="hesap_etkin" type="BOOL"/>
+            <column name="hesap_kilitli" type="BOOL"/>
+            <column name="ldap_eposta" type="VARCHAR(255)"/>
+            <column name="sifre" type="VARCHAR(255)"/>
+            <column name="soyad" type="VARCHAR(255)"/>
+            <column name="user_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-40">
+        <createTable tableName="kullanici_rol">
+            <column name="kullanici_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rol_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-41">
+        <createTable tableName="kullanici_rol_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kullanici_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rol_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-42">
+        <createTable tableName="kur">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="islem_tarihi" type="date"/>
+            <column name="kur_birimi" type="INT"/>
+            <column name="kur_orani" type="numeric(19, 5)"/>
+            <column name="kur_tarihi" type="date"/>
+            <column name="para_birimi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-43">
+        <createTable tableName="kur_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="islem_tarihi" type="date"/>
+            <column name="kur_birimi" type="INT"/>
+            <column name="kur_orani" type="numeric(19, 5)"/>
+            <column name="kur_tarihi" type="date"/>
+            <column name="para_birimi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-44">
+        <createTable tableName="kurulus">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="adi" type="VARCHAR(255)"/>
+            <column name="bulundugu_il" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="faaliyet_alani" type="VARCHAR(255)"/>
+            <column name="fax" type="VARCHAR(255)"/>
+            <column name="telefon" type="VARCHAR(255)"/>
+            <column name="telefon2" type="VARCHAR(255)"/>
+            <column name="urun_grubu" type="VARCHAR(255)"/>
+            <column name="uye_saisi" type="BIGINT"/>
+            <column name="web_sitesi" type="VARCHAR(255)"/>
+            <column name="adres_id" type="UUID"/>
+            <column name="yetkili_kisi_id" type="UUID"/>
+            <column name="kurulus_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-45">
+        <createTable tableName="kurulus_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="adi" type="VARCHAR(255)"/>
+            <column name="bulundugu_il" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="faaliyet_alani" type="VARCHAR(255)"/>
+            <column name="fax" type="VARCHAR(255)"/>
+            <column name="telefon" type="VARCHAR(255)"/>
+            <column name="telefon2" type="VARCHAR(255)"/>
+            <column name="urun_grubu" type="VARCHAR(255)"/>
+            <column name="uye_saisi" type="BIGINT"/>
+            <column name="web_sitesi" type="VARCHAR(255)"/>
+            <column name="adres_id" type="UUID"/>
+            <column name="yetkili_kisi_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-46">
+        <createTable tableName="kurum">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="adi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-47">
+        <createTable tableName="kurum_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="adi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-48">
+        <createTable tableName="medikal_tur_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-49">
+        <createTable tableName="medikal_tur_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-50">
+        <createTable tableName="mkys_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-51">
+        <createTable tableName="mkys_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-52">
+        <createTable tableName="nace_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-53">
+        <createTable tableName="nace_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-54">
+        <createTable tableName="ortaklik_bilgiler_isbirligi_firma_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isbirligi_firma_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-55">
+        <createTable tableName="ortaklik_bilgileri">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isbirligi_sunma_i̇stegi_var_mi" type="BOOL"/>
+            <column name="isbirligi_talebi_var_mi" type="BOOL"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-56">
+        <createTable tableName="ortaklik_bilgileri_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="isbirligi_sunma_i̇stegi_var_mi" type="BOOL"/>
+            <column name="isbirligi_talebi_var_mi" type="BOOL"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-57">
+        <createTable tableName="prodkom_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-58">
+        <createTable tableName="prodkom_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-59">
+        <createTable tableName="proje_bilgisi">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="konusu" type="VARCHAR(255)"/>
+            <column name="kurum_id" type="UUID"/>
+            <column name="proje_bilgisi_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-60">
+        <createTable tableName="proje_bilgisi_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="konusu" type="VARCHAR(255)"/>
+            <column name="kurum_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-61">
+        <createTable tableName="revinfo">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revisiondate" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="supportingusername" type="VARCHAR(255)"/>
+            <column name="timestamp" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-62">
+        <createTable tableName="rol">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="aciklama" type="VARCHAR(255)"/>
+            <column name="is_sistem_rolu" type="BOOL"/>
+            <column name="kod" type="VARCHAR(255)"/>
+            <column name="rol_tipi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-63">
+        <createTable tableName="rol_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="aciklama" type="VARCHAR(255)"/>
+            <column name="is_sistem_rolu" type="BOOL"/>
+            <column name="kod" type="VARCHAR(255)"/>
+            <column name="rol_tipi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-64">
+        <createTable tableName="rol_yetki">
+            <column name="rol_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="yetki_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-65">
+        <createTable tableName="rol_yetki_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rol_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="yetki_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-66">
+        <createTable tableName="sayisal_veri">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birim_fiyat_tutar" type="numeric(19, 2)"/>
+            <column name="birim_fiyat_tutar_pb" type="VARCHAR(3)"/>
+            <column name="dunya_pazari_tutar" type="numeric(19, 2)"/>
+            <column name="dunya_pazari_tutar_pb" type="VARCHAR(3)"/>
+            <column name="ihtiyac_miktari" type="BIGINT"/>
+            <column name="ithalat_miktari" type="BIGINT"/>
+            <column name="turkiye_pazari_tutar" type="numeric(19, 2)"/>
+            <column name="turkiye_pazari_tutar_pb" type="VARCHAR(3)"/>
+            <column name="yil" type="date"/>
+            <column name="urun_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-67">
+        <createTable tableName="sayisal_veri_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="birim_fiyat_tutar" type="numeric(19, 2)"/>
+            <column name="birim_fiyat_tutar_pb" type="VARCHAR(3)"/>
+            <column name="dunya_pazari_tutar" type="numeric(19, 2)"/>
+            <column name="dunya_pazari_tutar_pb" type="VARCHAR(3)"/>
+            <column name="ihtiyac_miktari" type="BIGINT"/>
+            <column name="ithalat_miktari" type="BIGINT"/>
+            <column name="turkiye_pazari_tutar" type="numeric(19, 2)"/>
+            <column name="turkiye_pazari_tutar_pb" type="VARCHAR(3)"/>
+            <column name="yil" type="date"/>
+            <column name="urun_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-68">
+        <createTable tableName="tesis_bilgisi">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bulundugu_ulke" type="VARCHAR(255)"/>
+            <column name="uretim_alani" type="VARCHAR(255)"/>
+            <column name="tesis_bilgisi_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-69">
+        <createTable tableName="tesis_bilgisi_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="bulundugu_ulke" type="VARCHAR(255)"/>
+            <column name="uretim_alani" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-70">
+        <createTable tableName="tibbi_cihaz_tehlike_sinifi">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sinif" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-71">
+        <createTable tableName="tibbi_cihaz_tehlike_sinifi_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="sinif" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-72">
+        <createTable tableName="token">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="expiry_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="value" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-73">
+        <createTable tableName="uretim_bilgisi">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firma_aciklamasi" type="VARCHAR(255)"/>
+            <column name="urun_id" type="UUID"/>
+            <column name="uretim_bilgisi_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-74">
+        <createTable tableName="uretim_bilgisi_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="firma_aciklamasi" type="VARCHAR(255)"/>
+            <column name="urun_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-75">
+        <createTable tableName="urun">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cesitleri" type="VARCHAR(255)"/>
+            <column name="endikasyonlari" type="VARCHAR(255)"/>
+            <column name="formlari" type="VARCHAR(255)"/>
+            <column name="kullanim_alanlari" type="VARCHAR(255)"/>
+            <column name="tanimi" type="VARCHAR(255)"/>
+            <column name="urun_act_kodu_id" type="UUID"/>
+            <column name="urun_gtip_kodu_id" type="UUID"/>
+            <column name="urun_medikal_tur_kodu_id" type="UUID"/>
+            <column name="urun_mkys_kodu_id" type="UUID"/>
+            <column name="urun_nace_kodu_id" type="UUID"/>
+            <column name="urun_prodkom_kodu_id" type="UUID"/>
+            <column name="urun_tibbi_cihaz_tehlike_sinifi_id" type="UUID"/>
+            <column name="urun_alt_kodu_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-76">
+        <createTable tableName="urun_alt_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="urun_alt_kod" type="VARCHAR(255)"/>
+            <column name="urun_alt_kodu_adi" type="VARCHAR(255)"/>
+            <column name="urun_kodu_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-77">
+        <createTable tableName="urun_alt_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="urun_alt_kod" type="VARCHAR(255)"/>
+            <column name="urun_alt_kodu_adi" type="VARCHAR(255)"/>
+            <column name="urun_kodu_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-78">
+        <createTable tableName="urun_belge_l">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="urun_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-79">
+        <createTable tableName="urun_grubu_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="urun_grubu_kod" type="VARCHAR(255)"/>
+            <column name="urun_grubu_kodu_adi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-80">
+        <createTable tableName="urun_grubu_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="urun_grubu_kod" type="VARCHAR(255)"/>
+            <column name="urun_grubu_kodu_adi" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-81">
+        <createTable tableName="urun_kodu">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="urun_kod" type="VARCHAR(255)"/>
+            <column name="urun_kodu_adi" type="VARCHAR(255)"/>
+            <column name="urun_grubu_kodu_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-82">
+        <createTable tableName="urun_kodu_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="urun_kod" type="VARCHAR(255)"/>
+            <column name="urun_kodu_adi" type="VARCHAR(255)"/>
+            <column name="urun_grubu_kodu_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-83">
+        <createTable tableName="urun_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="cesitleri" type="VARCHAR(255)"/>
+            <column name="endikasyonlari" type="VARCHAR(255)"/>
+            <column name="formlari" type="VARCHAR(255)"/>
+            <column name="kullanim_alanlari" type="VARCHAR(255)"/>
+            <column name="tanimi" type="VARCHAR(255)"/>
+            <column name="urun_act_kodu_id" type="UUID"/>
+            <column name="urun_gtip_kodu_id" type="UUID"/>
+            <column name="urun_medikal_tur_kodu_id" type="UUID"/>
+            <column name="urun_mkys_kodu_id" type="UUID"/>
+            <column name="urun_nace_kodu_id" type="UUID"/>
+            <column name="urun_prodkom_kodu_id" type="UUID"/>
+            <column name="urun_tibbi_cihaz_tehlike_sinifi_id" type="UUID"/>
+            <column name="urun_alt_kodu_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-84">
+        <createTable tableName="yetki">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="aciklama" type="VARCHAR(255)"/>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-85">
+        <createTable tableName="yetki_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="aciklama" type="VARCHAR(255)"/>
+            <column name="kod" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-86">
+        <createTable tableName="yillik_ciro">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="deleted" type="BOOL"/>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ciro_tutar" type="numeric(19, 2)"/>
+            <column name="ciro_pb" type="VARCHAR(3)"/>
+            <column name="yil" type="date"/>
+            <column name="yillik_ciro_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-87">
+        <createTable tableName="yillik_ciro_l">
+            <column name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="deleted" type="BOOL"/>
+            <column name="ciro_tutar" type="numeric(19, 2)"/>
+            <column name="ciro_pb" type="VARCHAR(3)"/>
+            <column name="yil" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-88">
+        <addPrimaryKey columnNames="id, rev" constraintName="act_kodu_l_pkey" tableName="act_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-89">
+        <addPrimaryKey columnNames="id" constraintName="act_kodu_pkey" tableName="act_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-90">
+        <addPrimaryKey columnNames="id, rev" constraintName="adres_l_pkey" tableName="adres_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-91">
+        <addPrimaryKey columnNames="id" constraintName="adres_pkey" tableName="adres"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-92">
+        <addPrimaryKey columnNames="id, rev" constraintName="belge_l_pkey" tableName="belge_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-93">
+        <addPrimaryKey columnNames="id" constraintName="belge_pkey" tableName="belge"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-94">
+        <addPrimaryKey columnNames="id, rev" constraintName="calisan_sayi_bilgisi_l_pkey" tableName="calisan_sayi_bilgisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-95">
+        <addPrimaryKey columnNames="id" constraintName="calisan_sayi_bilgisi_pkey" tableName="calisan_sayi_bilgisi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-96">
+        <addPrimaryKey columnNames="id" constraintName="ekran_ziyareti_pkey" tableName="ekran_ziyareti"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-97">
+        <addPrimaryKey columnNames="id, rev" constraintName="faaliyet_kodu_l_pkey" tableName="faaliyet_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-98">
+        <addPrimaryKey columnNames="id" constraintName="faaliyet_kodu_pkey" tableName="faaliyet_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-99">
+        <addPrimaryKey columnNames="rev, ihracat_id, id" constraintName="finansal_bilgiler_ihracat_l_pkey" tableName="finansal_bilgiler_ihracat_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-100">
+        <addPrimaryKey columnNames="rev, yillik_ciro_id, id" constraintName="finansal_bilgiler_yillik_ciro_l_pkey" tableName="finansal_bilgiler_yillik_ciro_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-101">
+        <addPrimaryKey columnNames="id, rev" constraintName="finansal_bilgileri_l_pkey" tableName="finansal_bilgileri_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-102">
+        <addPrimaryKey columnNames="id" constraintName="finansal_bilgileri_pkey" tableName="finansal_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-103">
+        <addPrimaryKey columnNames="id, rev" constraintName="firma_l_pkey" tableName="firma_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-104">
+        <addPrimaryKey columnNames="id" constraintName="firma_pkey" tableName="firma"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-105">
+        <addPrimaryKey columnNames="rev, proje_bilgisi_id, id" constraintName="firma_proje_bilgisi_l_pkey" tableName="firma_proje_bilgisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-106">
+        <addPrimaryKey columnNames="rev, tesis_bilgisi_id, id" constraintName="firma_tesis_bilgisi_l_pkey" tableName="firma_tesis_bilgisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-107">
+        <addPrimaryKey columnNames="rev, uretim_bilgisi_id, id" constraintName="firma_uretim_bilgisi_l_pkey" tableName="firma_uretim_bilgisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-108">
+        <addPrimaryKey columnNames="id, rev" constraintName="genel_firma_bilgileri_l_pkey" tableName="genel_firma_bilgileri_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-109">
+        <addPrimaryKey columnNames="id" constraintName="genel_firma_bilgileri_pkey" tableName="genel_firma_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-110">
+        <addPrimaryKey columnNames="id, rev" constraintName="gtip_kodu_l_pkey" tableName="gtip_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-111">
+        <addPrimaryKey columnNames="id" constraintName="gtip_kodu_pkey" tableName="gtip_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-112">
+        <addPrimaryKey columnNames="id, rev" constraintName="ihracat_l_pkey" tableName="ihracat_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-113">
+        <addPrimaryKey columnNames="id" constraintName="ihracat_pkey" tableName="ihracat"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-114">
+        <addPrimaryKey columnNames="id, rev" constraintName="isbirligi_firma_l_pkey" tableName="isbirligi_firma_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-115">
+        <addPrimaryKey columnNames="id" constraintName="isbirligi_firma_pkey" tableName="isbirligi_firma"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-116">
+        <addPrimaryKey columnNames="rev, belge_id, id" constraintName="isyeri_bilgileri_belge_l_pkey" tableName="isyeri_bilgileri_belge_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-117">
+        <addPrimaryKey columnNames="rev, calisan_sayi_bilgisi_id, id" constraintName="isyeri_bilgileri_calisan_sayi_bilgisi_l_pkey" tableName="isyeri_bilgileri_calisan_sayi_bilgisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-118">
+        <addPrimaryKey columnNames="id, rev" constraintName="isyeri_bilgileri_l_pkey" tableName="isyeri_bilgileri_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-119">
+        <addPrimaryKey columnNames="id" constraintName="isyeri_bilgileri_pkey" tableName="isyeri_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-120">
+        <addPrimaryKey columnNames="rev, kurulus_id, id" constraintName="isyeribilgileri_kurulus_l_pkey" tableName="isyeribilgileri_kurulus_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-121">
+        <addPrimaryKey columnNames="id, rev" constraintName="kisi_l_pkey" tableName="kisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-122">
+        <addPrimaryKey columnNames="id" constraintName="kisi_pkey" tableName="kisi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-123">
+        <addPrimaryKey columnNames="id, rev" constraintName="kullanici_l_pkey" tableName="kullanici_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-124">
+        <addPrimaryKey columnNames="id" constraintName="kullanici_pkey" tableName="kullanici"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-125">
+        <addPrimaryKey columnNames="rev, kullanici_id, rol_id" constraintName="kullanici_rol_l_pkey" tableName="kullanici_rol_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-126">
+        <addPrimaryKey columnNames="kullanici_id, rol_id" constraintName="kullanici_rol_pkey" tableName="kullanici_rol"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-127">
+        <addPrimaryKey columnNames="id, rev" constraintName="kur_l_pkey" tableName="kur_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-128">
+        <addPrimaryKey columnNames="id" constraintName="kur_pkey" tableName="kur"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-129">
+        <addPrimaryKey columnNames="id, rev" constraintName="kurulus_l_pkey" tableName="kurulus_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-130">
+        <addPrimaryKey columnNames="id" constraintName="kurulus_pkey" tableName="kurulus"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-131">
+        <addPrimaryKey columnNames="id, rev" constraintName="kurum_l_pkey" tableName="kurum_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-132">
+        <addPrimaryKey columnNames="id" constraintName="kurum_pkey" tableName="kurum"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-133">
+        <addPrimaryKey columnNames="id, rev" constraintName="medikal_tur_kodu_l_pkey" tableName="medikal_tur_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-134">
+        <addPrimaryKey columnNames="id" constraintName="medikal_tur_kodu_pkey" tableName="medikal_tur_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-135">
+        <addPrimaryKey columnNames="id, rev" constraintName="mkys_kodu_l_pkey" tableName="mkys_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-136">
+        <addPrimaryKey columnNames="id" constraintName="mkys_kodu_pkey" tableName="mkys_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-137">
+        <addPrimaryKey columnNames="id, rev" constraintName="nace_kodu_l_pkey" tableName="nace_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-138">
+        <addPrimaryKey columnNames="id" constraintName="nace_kodu_pkey" tableName="nace_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-139">
+        <addPrimaryKey columnNames="rev, isbirligi_firma_id, id" constraintName="ortaklik_bilgiler_isbirligi_firma_l_pkey" tableName="ortaklik_bilgiler_isbirligi_firma_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-140">
+        <addPrimaryKey columnNames="id, rev" constraintName="ortaklik_bilgileri_l_pkey" tableName="ortaklik_bilgileri_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-141">
+        <addPrimaryKey columnNames="id" constraintName="ortaklik_bilgileri_pkey" tableName="ortaklik_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-142">
+        <addPrimaryKey columnNames="id, rev" constraintName="prodkom_kodu_l_pkey" tableName="prodkom_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-143">
+        <addPrimaryKey columnNames="id" constraintName="prodkom_kodu_pkey" tableName="prodkom_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-144">
+        <addPrimaryKey columnNames="id, rev" constraintName="proje_bilgisi_l_pkey" tableName="proje_bilgisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-145">
+        <addPrimaryKey columnNames="id" constraintName="proje_bilgisi_pkey" tableName="proje_bilgisi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-146">
+        <addPrimaryKey columnNames="id" constraintName="revinfo_pkey" tableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-147">
+        <addPrimaryKey columnNames="id, rev" constraintName="rol_l_pkey" tableName="rol_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-148">
+        <addPrimaryKey columnNames="id" constraintName="rol_pkey" tableName="rol"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-149">
+        <addPrimaryKey columnNames="rev, rol_id, yetki_id" constraintName="rol_yetki_l_pkey" tableName="rol_yetki_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-150">
+        <addPrimaryKey columnNames="rol_id, yetki_id" constraintName="rol_yetki_pkey" tableName="rol_yetki"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-151">
+        <addPrimaryKey columnNames="id, rev" constraintName="sayisal_veri_l_pkey" tableName="sayisal_veri_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-152">
+        <addPrimaryKey columnNames="id" constraintName="sayisal_veri_pkey" tableName="sayisal_veri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-153">
+        <addPrimaryKey columnNames="id, rev" constraintName="tesis_bilgisi_l_pkey" tableName="tesis_bilgisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-154">
+        <addPrimaryKey columnNames="id" constraintName="tesis_bilgisi_pkey" tableName="tesis_bilgisi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-155">
+        <addPrimaryKey columnNames="id, rev" constraintName="tibbi_cihaz_tehlike_sinifi_l_pkey" tableName="tibbi_cihaz_tehlike_sinifi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-156">
+        <addPrimaryKey columnNames="id" constraintName="tibbi_cihaz_tehlike_sinifi_pkey" tableName="tibbi_cihaz_tehlike_sinifi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-157">
+        <addPrimaryKey columnNames="id" constraintName="token_pkey" tableName="token"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-158">
+        <addPrimaryKey columnNames="id, rev" constraintName="uretim_bilgisi_l_pkey" tableName="uretim_bilgisi_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-159">
+        <addPrimaryKey columnNames="id" constraintName="uretim_bilgisi_pkey" tableName="uretim_bilgisi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-160">
+        <addPrimaryKey columnNames="id, rev" constraintName="urun_alt_kodu_l_pkey" tableName="urun_alt_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-161">
+        <addPrimaryKey columnNames="id" constraintName="urun_alt_kodu_pkey" tableName="urun_alt_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-162">
+        <addPrimaryKey columnNames="rev, urun_id, id" constraintName="urun_belge_l_pkey" tableName="urun_belge_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-163">
+        <addPrimaryKey columnNames="id, rev" constraintName="urun_grubu_kodu_l_pkey" tableName="urun_grubu_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-164">
+        <addPrimaryKey columnNames="id" constraintName="urun_grubu_kodu_pkey" tableName="urun_grubu_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-165">
+        <addPrimaryKey columnNames="id, rev" constraintName="urun_kodu_l_pkey" tableName="urun_kodu_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-166">
+        <addPrimaryKey columnNames="id" constraintName="urun_kodu_pkey" tableName="urun_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-167">
+        <addPrimaryKey columnNames="id, rev" constraintName="urun_l_pkey" tableName="urun_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-168">
+        <addPrimaryKey columnNames="id" constraintName="urun_pkey" tableName="urun"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-169">
+        <addPrimaryKey columnNames="id, rev" constraintName="yetki_l_pkey" tableName="yetki_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-170">
+        <addPrimaryKey columnNames="id" constraintName="yetki_pkey" tableName="yetki"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-171">
+        <addPrimaryKey columnNames="id, rev" constraintName="yillik_ciro_l_pkey" tableName="yillik_ciro_l"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-172">
+        <addPrimaryKey columnNames="id" constraintName="yillik_ciro_pkey" tableName="yillik_ciro"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-173">
+        <addUniqueConstraint columnNames="eposta" constraintName="uk_kullanici_eposta" tableName="kullanici"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-174">
+        <addUniqueConstraint columnNames="kod" constraintName="uk_rol_kod" tableName="rol"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-175">
+        <addUniqueConstraint columnNames="kod" constraintName="uk_yetki_kod" tableName="yetki"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-176">
+        <addUniqueConstraint columnNames="para_birimi, kur_tarihi" constraintName="ukp11ihbveqssip1n19hc68w81p" tableName="kur"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-177">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="urun_belge_l" constraintName="fk1w5apcgt0apuyjnr60cdtrat4" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-178">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="firma_l" constraintName="fk276i3ihq8wobb0jo6muylt7l5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-179">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="adres_l" constraintName="fk2vdl8t71pc251rjmdf6uexis0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-180">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="mkys_kodu_l" constraintName="fk32xw28noa3s6ibpn8co370lfo" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-181">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="firma_proje_bilgisi_l" constraintName="fk3m2tj8hxi552s9qqklcyjw9jn" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-182">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="nace_kodu_l" constraintName="fk3t0b90wonuny4325mta03jo60" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-183">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="isyeribilgileri_kurulus_l" constraintName="fk70x2b0vji56vwr6we5phdfibe" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-184">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="ihracat_l" constraintName="fk71klk2pbtl99omt12eislnqdn" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-185">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="prodkom_kodu_l" constraintName="fk7feb8qd57o36c06nnsgx23ef3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-186">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="kullanici_l" constraintName="fk7v07g96x1peobkkye4q3efw48" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-187">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="finansal_bilgiler_ihracat_l" constraintName="fk8mxm8cmijoj4jgtatexnbsaam" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-188">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="finansal_bilgileri_l" constraintName="fk8xu7jn2f5iksj2jyjo08bop3y" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-189">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="rol_l" constraintName="fk9x87a1giwf306men7axmtun99" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-190">
+        <addForeignKeyConstraint baseColumnNames="ihracat_id" baseTableName="ihracat" constraintName="fk_finansal_bilgiler_ihracat" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="finansal_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-191">
+        <addForeignKeyConstraint baseColumnNames="yillik_ciro_id" baseTableName="yillik_ciro" constraintName="fk_finansal_bilgiler_yillik_ciro" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="finansal_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-192">
+        <addForeignKeyConstraint baseColumnNames="adres_id" baseTableName="genel_firma_bilgileri" constraintName="fk_firma_adres" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="adres"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-193">
+        <addForeignKeyConstraint baseColumnNames="faali̇yet_kodu_id" baseTableName="genel_firma_bilgileri" constraintName="fk_firma_faalİyet_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="faaliyet_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-194">
+        <addForeignKeyConstraint baseColumnNames="finansal_bilgileri_id" baseTableName="firma" constraintName="fk_firma_finansal_bilgileri" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="finansal_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-195">
+        <addForeignKeyConstraint baseColumnNames="isyeri_bilgileri_id" baseTableName="firma" constraintName="fk_firma_firma_isyeri_bilgileri" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="isyeri_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-196">
+        <addForeignKeyConstraint baseColumnNames="genel_firma_bilgiler_id" baseTableName="firma" constraintName="fk_firma_genel_firma_bilgiler" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="genel_firma_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-197">
+        <addForeignKeyConstraint baseColumnNames="kaydi_olusturan_kisi_id" baseTableName="genel_firma_bilgileri" constraintName="fk_firma_kaydi_olusturan_kisi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="kisi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-198">
+        <addForeignKeyConstraint baseColumnNames="ortaklik_bilgileri_id" baseTableName="firma" constraintName="fk_firma_ortaklik_bilgileri" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ortaklik_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-199">
+        <addForeignKeyConstraint baseColumnNames="proje_bilgisi_id" baseTableName="proje_bilgisi" constraintName="fk_firma_proje_bilgisi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="firma"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-200">
+        <addForeignKeyConstraint baseColumnNames="tesis_bilgisi_id" baseTableName="tesis_bilgisi" constraintName="fk_firma_tesis_bilgisi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="firma"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-201">
+        <addForeignKeyConstraint baseColumnNames="uretim_bilgisi_id" baseTableName="uretim_bilgisi" constraintName="fk_firma_uretim_bilgisi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="firma"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-202">
+        <addForeignKeyConstraint baseColumnNames="yetkili_kisi_id" baseTableName="genel_firma_bilgileri" constraintName="fk_firma_yetkili_kisi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="kisi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-203">
+        <addForeignKeyConstraint baseColumnNames="belge_id" baseTableName="belge" constraintName="fk_isyeri_bilgileri_belge" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="isyeri_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-204">
+        <addForeignKeyConstraint baseColumnNames="calisan_sayi_bilgisi_id" baseTableName="calisan_sayi_bilgisi" constraintName="fk_isyeri_bilgileri_calisan_sayi_bilgisi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="isyeri_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-205">
+        <addForeignKeyConstraint baseColumnNames="kurulus_id" baseTableName="kurulus" constraintName="fk_isyeribilgileri_kurulus" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="isyeri_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-206">
+        <addForeignKeyConstraint baseColumnNames="kullanici_id" baseTableName="kullanici_rol" constraintName="fk_kullanici_rol_kullanici" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="kullanici"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-207">
+        <addForeignKeyConstraint baseColumnNames="rol_id" baseTableName="kullanici_rol" constraintName="fk_kullanici_rol_rol" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="rol"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-208">
+        <addForeignKeyConstraint baseColumnNames="adres_id" baseTableName="kurulus" constraintName="fk_kurulus_adres" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="adres"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-209">
+        <addForeignKeyConstraint baseColumnNames="yetkili_kisi_id" baseTableName="kurulus" constraintName="fk_kurulus_yetkili_kisi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="kisi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-210">
+        <addForeignKeyConstraint baseColumnNames="isbirligi_firma_id" baseTableName="isbirligi_firma" constraintName="fk_ortaklik_bilgiler_isbirligi_firma" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ortaklik_bilgileri"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-211">
+        <addForeignKeyConstraint baseColumnNames="kurum_id" baseTableName="proje_bilgisi" constraintName="fk_proje_bilgileri_kurum" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="kurum"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-212">
+        <addForeignKeyConstraint baseColumnNames="rol_id" baseTableName="rol_yetki" constraintName="fk_rol_yetki_rol" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="rol"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-213">
+        <addForeignKeyConstraint baseColumnNames="yetki_id" baseTableName="rol_yetki" constraintName="fk_rol_yetki_yetki" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="yetki"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-214">
+        <addForeignKeyConstraint baseColumnNames="urun_id" baseTableName="sayisal_veri" constraintName="fk_sayisal_veri_urun" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="urun"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-215">
+        <addForeignKeyConstraint baseColumnNames="urun_id" baseTableName="uretim_bilgisi" constraintName="fk_uretim_bilgileri_urun_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="urun"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-216">
+        <addForeignKeyConstraint baseColumnNames="urun_act_kodu_id" baseTableName="urun" constraintName="fk_urun_act_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="act_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-217">
+        <addForeignKeyConstraint baseColumnNames="urun_kodu_id" baseTableName="urun_alt_kodu" constraintName="fk_urun_alt_kodu_urun_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="urun_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-218">
+        <addForeignKeyConstraint baseColumnNames="urun_id" baseTableName="belge" constraintName="fk_urun_belge" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="urun"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-219">
+        <addForeignKeyConstraint baseColumnNames="urun_gtip_kodu_id" baseTableName="urun" constraintName="fk_urun_gtip_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gtip_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-220">
+        <addForeignKeyConstraint baseColumnNames="urun_grubu_kodu_id" baseTableName="urun_kodu" constraintName="fk_urun_kodu_urun_grubu_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="urun_grubu_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-221">
+        <addForeignKeyConstraint baseColumnNames="urun_medikal_tur_kodu_id" baseTableName="urun" constraintName="fk_urun_medikal_tur_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="medikal_tur_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-222">
+        <addForeignKeyConstraint baseColumnNames="urun_mkys_kodu_id" baseTableName="urun" constraintName="fk_urun_mkys_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="mkys_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-223">
+        <addForeignKeyConstraint baseColumnNames="urun_nace_kodu_id" baseTableName="urun" constraintName="fk_urun_nace_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="nace_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-224">
+        <addForeignKeyConstraint baseColumnNames="urun_prodkom_kodu_id" baseTableName="urun" constraintName="fk_urun_prodkom_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="prodkom_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-225">
+        <addForeignKeyConstraint baseColumnNames="urun_tibbi_cihaz_tehlike_sinifi_id" baseTableName="urun" constraintName="fk_urun_tibbi_cihaz_tehlike_sinifi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tibbi_cihaz_tehlike_sinifi"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-226">
+        <addForeignKeyConstraint baseColumnNames="urun_alt_kodu_id" baseTableName="urun" constraintName="fk_urun_urun_alt_kodu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="urun_alt_kodu"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-227">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="isyeri_bilgileri_calisan_sayi_bilgisi_l" constraintName="fkb9flwdlmt28hqvv5fb0f5ktdr" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-228">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="ortaklik_bilgiler_isbirligi_firma_l" constraintName="fkbw9hr16i9s8e3gr9c40t6odxh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-229">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="rol_yetki_l" constraintName="fkcvyjn03tke1267krlby8nh4k7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-230">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="uretim_bilgisi_l" constraintName="fkduhatylkkg87dfg5jm3egdgo7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-231">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="urun_alt_kodu_l" constraintName="fke50avegjlhjl9a2p4pxrd7rmt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-232">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="yetki_l" constraintName="fke8nxl4ypy45d7g8oxhg17hr4f" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-233">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="isbirligi_firma_l" constraintName="fkedlee6klga0f86sy3l9eulhcy" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-234">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="gtip_kodu_l" constraintName="fkf2pf91rg86ye11vq24pvo665p" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-235">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="finansal_bilgiler_yillik_ciro_l" constraintName="fkfnkqh53j1qfg5bawoxa1181cm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-236">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="tesis_bilgisi_l" constraintName="fkge9hwd71uvqw7c7flpjnaxay5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-237">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="act_kodu_l" constraintName="fkh3c709j1atckcwmxuxb7t7vhp" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-238">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="isyeri_bilgileri_l" constraintName="fkiu6gers96ofstrl2f3asout73" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-239">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="proje_bilgisi_l" constraintName="fkj061jkd334j1t6os6aeqwulyu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-240">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="tibbi_cihaz_tehlike_sinifi_l" constraintName="fkjfuu12fhhgluld9hcvcv7ftyc" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-241">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="yillik_ciro_l" constraintName="fkjoo45fw4orvbrsn3spabhpaaa" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-242">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="kullanici_rol_l" constraintName="fkjqjcibvd4vigid4n7in3kg63k" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-243">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="firma_uretim_bilgisi_l" constraintName="fkjylspxucwl7wq9ln87hnm21e5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-244">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="isyeri_bilgileri_belge_l" constraintName="fkk3avvevq3mpoigbhk5wisjv2w" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-245">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="firma_tesis_bilgisi_l" constraintName="fklov7y9oy7512c91lnidaaknfw" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-246">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="kisi_l" constraintName="fkmamvvse8j8m96jy5mkxtxyjvf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-247">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="kurum_l" constraintName="fkmbk3wjsj6m9lcfp4yd6tky9sc" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-248">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="medikal_tur_kodu_l" constraintName="fkmqx9gl0borxk9llxnbikvh9o9" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-249">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="belge_l" constraintName="fkmtapxa2cuqdkioakt117yojf9" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-250">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="ortaklik_bilgileri_l" constraintName="fkn0k3ppgm98cldj36wyq6oyahe" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-251">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="kur_l" constraintName="fkngcw2nq7gxww1r264k6a97yh0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-252">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="sayisal_veri_l" constraintName="fknghpcjnskhsvyp4cibb12ovpb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-253">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="urun_grubu_kodu_l" constraintName="fknv1dq4vu5plin2cxx226mt8np" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-254">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="calisan_sayi_bilgisi_l" constraintName="fko4lw5k9rlru81a0dam6m3ouq6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-255">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="kurulus_l" constraintName="fkp7x07bkvpc6c3g6pr9afv26nb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-256">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="faaliyet_kodu_l" constraintName="fkpb75n6mnaif6bumew2bek6unl" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-257">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="urun_l" constraintName="fkpthganevyuf665l05fdue0l9a" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-258">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="urun_kodu_l" constraintName="fkrfojsn0rpu9eerr0m9l6m7wdb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="gcan (generated)" id="1502979443129-259">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="genel_firma_bilgileri_l" constraintName="fkym87eerx7pt6af6oagcx6v1d" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="revinfo"/>
+    </changeSet>
 </databaseChangeLog>
