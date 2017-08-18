@@ -3,7 +3,9 @@ package com.github.cangoksel.firma;
 import com.github.cangoksel.common.entity.AbstractVersionedEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Columns;
 import org.hibernate.envers.Audited;
 import org.javamoney.moneta.Money;
@@ -17,6 +19,8 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Slf4j
 public class YillikCiro extends AbstractVersionedEntity {
 
     @Column

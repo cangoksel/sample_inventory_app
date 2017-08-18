@@ -1,6 +1,7 @@
 package com.github.cangoksel.firma;
 
 import com.github.cangoksel.common.utils.Displayable;
+import lombok.Getter;
 
 public enum Bolge implements Displayable {
     AKDENIZ("Akdeniz"),

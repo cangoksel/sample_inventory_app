@@ -2,6 +2,8 @@ package com.github.cangoksel.common;
 
 import com.github.cangoksel.common.entity.SampleRevisionEntity;
 import com.google.common.base.MoreObjects;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.envers.RevisionEntity;
 import org.hibernate.envers.RevisionNumber;
 import org.hibernate.envers.RevisionTimestamp;
@@ -21,6 +23,8 @@ import java.util.Objects;
 @Entity
 @RevisionEntity(SampleRevisionListener.class)
 @Table(name = "REVINFO")
+@Getter
+@Slf4j
 public class SampleRevisionEntityImpl implements SampleRevisionEntity, Serializable {
     @Id
     @GeneratedValue

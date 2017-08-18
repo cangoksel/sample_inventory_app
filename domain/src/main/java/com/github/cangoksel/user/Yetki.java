@@ -1,6 +1,8 @@
 package com.github.cangoksel.user;
 
 import com.github.cangoksel.common.entity.AbstractVersionedEntity;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.Column;
@@ -14,6 +16,8 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "YETKI", uniqueConstraints = {@UniqueConstraint(columnNames = "KOD", name = "UK_YETKI_KOD")})
 @Audited
+@Getter
+@Slf4j
 public class Yetki extends AbstractVersionedEntity {
 
     @Column(name = "KOD")

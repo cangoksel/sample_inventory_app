@@ -5,6 +5,7 @@ import com.google.common.base.Charsets;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -15,12 +16,14 @@ import java.util.UUID;
 /**
  * Created by herdemir on 16.06.2015.
  */
-@Getter
+
 @Entity
 @Table(name = "BELGE")
 @Audited
 @Builder
 @AllArgsConstructor
+@Getter
+@Slf4j
 public class Belge extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "BELGE_TIPI")

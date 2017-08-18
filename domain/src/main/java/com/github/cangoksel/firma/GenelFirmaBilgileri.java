@@ -4,7 +4,9 @@ import com.github.cangoksel.common.entity.AbstractVersionedEntity;
 import com.github.cangoksel.common.validation.constraints.Telefon;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.envers.AuditJoinTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Email;
@@ -17,6 +19,8 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Slf4j
 public class GenelFirmaBilgileri extends AbstractVersionedEntity {
     @Column
     String firmaUnvan;

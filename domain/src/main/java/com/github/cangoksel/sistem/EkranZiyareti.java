@@ -2,6 +2,8 @@ package com.github.cangoksel.sistem;
 
 
 import com.github.cangoksel.common.entity.AbstractEntity;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,8 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "EKRAN_ZIYARETI")
+@Getter
+@Slf4j
 public class EkranZiyareti extends AbstractEntity {
     @Column(name = "ZIYARET_ZAMANI")
     private LocalDateTime ziyaretZamani;

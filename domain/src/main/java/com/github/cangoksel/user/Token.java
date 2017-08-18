@@ -4,6 +4,7 @@ import com.github.cangoksel.common.entity.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,11 +15,12 @@ import java.util.UUID;
 /**
  * Created by herdemir on 20.11.2015.
  */
-@Getter
 @Entity
 @Table(name = "TOKEN")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Slf4j
 public class Token extends AbstractEntity {
     public static final int EXPIRATION_TIME = 12; //12 saat
 

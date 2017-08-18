@@ -19,7 +19,7 @@ spring:
       #'hibernate.search.Merci.indexBase': 'C:\Temp\Lucene'
     }
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     generate-ddl: true
 
   datasource:

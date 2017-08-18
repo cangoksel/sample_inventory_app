@@ -20,6 +20,7 @@ import {AlertService} from "./_services/alert.service";
 import {AuthGuard} from "./_guards/auth.guard";
 
 import {DxButtonModule, DxResponsiveBoxModule} from 'devextreme-angular';
+import {AdresService} from "./_services/adres.service";
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {DxButtonModule, DxResponsiveBoxModule} from 'devextreme-angular';
     AlertService,
     AuthenticationService,
     UserService,
+    AdresService,
 
     // providers used to create fake backend
     //fakeBackendProvider,

@@ -3,6 +3,8 @@ package com.github.cangoksel.user;
 import com.github.cangoksel.common.entity.AbstractVersionedEntity;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -18,6 +20,8 @@ import java.util.*;
 })
 @Audited
 @Cacheable
+@Getter
+@Slf4j
 public class Rol extends AbstractVersionedEntity {
 
     public static final String ROLE_BURO = "ROLE_BURO";

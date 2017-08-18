@@ -1,6 +1,8 @@
 package com.github.cangoksel.common.money;
 
 import com.github.cangoksel.common.entity.AbstractVersionedEntity;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -14,6 +16,8 @@ import java.time.LocalDate;
 @Table(name = "KUR",uniqueConstraints = @UniqueConstraint(columnNames = {"PARA_BIRIMI", "KUR_TARIHI"}))
 @Cacheable
 @Audited
+@Getter
+@Slf4j
 public class Kur extends AbstractVersionedEntity {
     @Column(name = "ISLEM_TARIHI")
     private LocalDate islemTarihi;

@@ -7,6 +7,8 @@ import com.github.cangoksel.common.utils.PasswordUtils;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
@@ -30,6 +32,8 @@ import java.util.stream.Collectors;
 @Table(name = "KULLANICI", uniqueConstraints = {@UniqueConstraint(columnNames = "EPOSTA", name = "UK_KULLANICI_EPOSTA")})
 @Audited
 @Cacheable
+@Getter
+@Slf4j
 public class Kullanici extends AbstractVersionedEntity implements KullaniciInfo {
     public static final String ESKI_SIFRE_HATALI = "Eski Şifre hatalı.";
     public static final String ESKI_SIFRE_ILE_YENI_SIFRE_AYNI_OLAMAZ = "Eski Şifre ile Yeni Şifre aynı olamaz.";
